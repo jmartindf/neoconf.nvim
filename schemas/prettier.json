@@ -1,0 +1,242 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Code formatter using prettier",
+  "properties": {
+    "prettier.arrowParens": {
+      "default": "always",
+      "enum": [
+        "avoid",
+        "always"
+      ],
+      "markdownDescription": "%ext.config.arrowParens%",
+      "scope": "language-overridable",
+      "type": "string"
+    },
+    "prettier.bracketSameLine": {
+      "default": false,
+      "markdownDescription": "%ext.config.bracketSameLine%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.bracketSpacing": {
+      "default": true,
+      "markdownDescription": "%ext.config.bracketSpacing%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.configPath": {
+      "markdownDescription": "%ext.config.configPath%",
+      "scope": "resource",
+      "type": "string"
+    },
+    "prettier.disableLanguages": {
+      "deprecationMessage": "%ext.config.disableLanguagesDeprecation%",
+      "items": {
+        "type": "string"
+      },
+      "markdownDescription": "%ext.config.disableLanguages%",
+      "scope": "window",
+      "type": "array"
+    },
+    "prettier.documentSelectors": {
+      "items": {
+        "type": "string"
+      },
+      "markdownDescription": "%ext.config.documentSelectors%",
+      "scope": "window",
+      "type": "array"
+    },
+    "prettier.embeddedLanguageFormatting": {
+      "default": "auto",
+      "enum": [
+        "auto",
+        "off"
+      ],
+      "markdownDescription": "%ext.config.embeddedLanguageFormatting%",
+      "scope": "language-overridable",
+      "type": "string"
+    },
+    "prettier.enable": {
+      "default": true,
+      "markdownDescription": "%ext.config.enable%",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "prettier.enableDebugLogs": {
+      "default": false,
+      "markdownDescription": "%ext.config.enableDebugLogs%",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "prettier.endOfLine": {
+      "default": "lf",
+      "enum": [
+        "auto",
+        "lf",
+        "crlf",
+        "cr"
+      ],
+      "markdownDescription": "%ext.config.endOfLine%",
+      "scope": "language-overridable",
+      "type": "string"
+    },
+    "prettier.htmlWhitespaceSensitivity": {
+      "default": "css",
+      "enum": [
+        "css",
+        "strict",
+        "ignore"
+      ],
+      "markdownDescription": "%ext.config.htmlWhitespaceSensitivity%",
+      "scope": "language-overridable",
+      "type": "string"
+    },
+    "prettier.ignorePath": {
+      "default": ".prettierignore",
+      "markdownDescription": "%ext.config.ignorePath%",
+      "scope": "resource",
+      "type": "string"
+    },
+    "prettier.insertPragma": {
+      "default": false,
+      "markdownDescription": "%ext.config.insertPragma%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.jsxBracketSameLine": {
+      "default": false,
+      "deprecationMessage": "%ext.config.jsxBracketSameLineDeprecation%",
+      "markdownDescription": "%ext.config.jsxBracketSameLine%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.jsxSingleQuote": {
+      "default": false,
+      "markdownDescription": "%ext.config.jsxSingleQuote%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.packageManager": {
+      "default": "npm",
+      "deprecationMessage": "%ext.config.packageManagerDeprecation%",
+      "enum": [
+        "npm",
+        "yarn",
+        "pnpm"
+      ],
+      "markdownDescription": "%ext.config.packageManager%",
+      "scope": "resource",
+      "type": "string"
+    },
+    "prettier.prettierPath": {
+      "markdownDescription": "%ext.config.prettierPath%",
+      "scope": "resource",
+      "type": "string"
+    },
+    "prettier.printWidth": {
+      "default": 80,
+      "markdownDescription": "%ext.config.printWidth%",
+      "scope": "language-overridable",
+      "type": "integer"
+    },
+    "prettier.proseWrap": {
+      "default": "preserve",
+      "enum": [
+        "preserve",
+        "always",
+        "never"
+      ],
+      "markdownDescription": "%ext.config.proseWrap%",
+      "scope": "language-overridable",
+      "type": "string"
+    },
+    "prettier.quoteProps": {
+      "default": "as-needed",
+      "enum": [
+        "as-needed",
+        "consistent",
+        "preserve"
+      ],
+      "markdownDescription": "%ext.config.quoteProps%",
+      "scope": "language-overridable",
+      "type": "string"
+    },
+    "prettier.requireConfig": {
+      "default": false,
+      "markdownDescription": "%ext.config.requireConfig%",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "prettier.requirePragma": {
+      "default": false,
+      "markdownDescription": "%ext.config.requirePragma%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.resolveGlobalModules": {
+      "default": false,
+      "markdownDescription": "%ext.config.resolveGlobalModules%",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "prettier.semi": {
+      "default": true,
+      "markdownDescription": "%ext.config.semi%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.singleAttributePerLine": {
+      "default": false,
+      "markdownDescription": "%ext.config.singleAttributePerLine%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.singleQuote": {
+      "default": false,
+      "markdownDescription": "%ext.config.singleQuote%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.tabWidth": {
+      "default": 2,
+      "markdownDescription": "%ext.config.tabWidth%",
+      "scope": "language-overridable",
+      "type": "integer"
+    },
+    "prettier.trailingComma": {
+      "default": "es5",
+      "enum": [
+        "none",
+        "es5",
+        "all"
+      ],
+      "markdownDescription": "%ext.config.trailingComma%",
+      "scope": "language-overridable",
+      "type": "string"
+    },
+    "prettier.useEditorConfig": {
+      "default": true,
+      "markdownDescription": "%ext.config.useEditorConfig%",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "prettier.useTabs": {
+      "default": false,
+      "markdownDescription": "%ext.config.useTabs%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.vueIndentScriptAndStyle": {
+      "default": false,
+      "markdownDescription": "%ext.config.vueIndentScriptAndStyle%",
+      "scope": "language-overridable",
+      "type": "boolean"
+    },
+    "prettier.withNodeModules": {
+      "default": false,
+      "markdownDescription": "%ext.config.withNodeModules%",
+      "scope": "resource",
+      "type": "boolean"
+    }
+  }
+}

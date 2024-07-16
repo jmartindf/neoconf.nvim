@@ -41,6 +41,14 @@ lspconfig.awkls = {
   setup = function(options) end,
 }
 
+---@class lspconfig.options.basedpyright: _.lspconfig.options
+---@field settings lspconfig.settings.basedpyright
+
+lspconfig.basedpyright = {
+  ---@param options lspconfig.options.basedpyright
+  setup = function(options) end,
+}
+
 ---@class lspconfig.options.bashls: _.lspconfig.options
 ---@field settings lspconfig.settings.bashls
 
@@ -118,6 +126,14 @@ lspconfig.flow = {
 
 lspconfig.fsautocomplete = {
   ---@param options lspconfig.options.fsautocomplete
+  setup = function(options) end,
+}
+
+---@class lspconfig.options.gopls: _.lspconfig.options
+---@field settings lspconfig.settings.gopls
+
+lspconfig.gopls = {
+  ---@param options lspconfig.options.gopls
   setup = function(options) end,
 }
 
@@ -233,6 +249,14 @@ lspconfig.luau_lsp = {
   setup = function(options) end,
 }
 
+---@class lspconfig.options.nil_ls: _.lspconfig.options
+---@field settings lspconfig.settings.nil_ls
+
+lspconfig.nil_ls = {
+  ---@param options lspconfig.options.nil_ls
+  setup = function(options) end,
+}
+
 ---@class lspconfig.options.omnisharp: _.lspconfig.options
 ---@field settings lspconfig.settings.omnisharp
 
@@ -270,6 +294,14 @@ lspconfig.perlpls = {
 
 lspconfig.powershell_es = {
   ---@param options lspconfig.options.powershell_es
+  setup = function(options) end,
+}
+
+---@class lspconfig.options.prettier: _.lspconfig.options
+---@field settings lspconfig.settings.prettier
+
+lspconfig.prettier = {
+  ---@param options lspconfig.options.prettier
   setup = function(options) end,
 }
 
@@ -433,6 +465,14 @@ lspconfig.tailwindcss = {
   setup = function(options) end,
 }
 
+---@class lspconfig.options.taplo: _.lspconfig.options
+---@field settings lspconfig.settings.taplo
+
+lspconfig.taplo = {
+  ---@param options lspconfig.options.taplo
+  setup = function(options) end,
+}
+
 ---@class lspconfig.options.terraformls: _.lspconfig.options
 ---@field settings lspconfig.settings.terraformls
 
@@ -509,6 +549,7 @@ lspconfig.zls = {
 ---@field als lspconfig.options.als
 ---@field astro lspconfig.options.astro
 ---@field awkls lspconfig.options.awkls
+---@field basedpyright lspconfig.options.basedpyright
 ---@field bashls lspconfig.options.bashls
 ---@field clangd lspconfig.options.clangd
 ---@field cssls lspconfig.options.cssls
@@ -519,6 +560,7 @@ lspconfig.zls = {
 ---@field eslint lspconfig.options.eslint
 ---@field flow lspconfig.options.flow
 ---@field fsautocomplete lspconfig.options.fsautocomplete
+---@field gopls lspconfig.options.gopls
 ---@field grammarly lspconfig.options.grammarly
 ---@field haxe_language_server lspconfig.options.haxe_language_server
 ---@field hhvm lspconfig.options.hhvm
@@ -533,11 +575,13 @@ lspconfig.zls = {
 ---@field ltex lspconfig.options.ltex
 ---@field lua_ls lspconfig.options.lua_ls
 ---@field luau_lsp lspconfig.options.luau_lsp
+---@field nil_ls lspconfig.options.nil_ls
 ---@field omnisharp lspconfig.options.omnisharp
 ---@field perlls lspconfig.options.perlls
 ---@field perlnavigator lspconfig.options.perlnavigator
 ---@field perlpls lspconfig.options.perlpls
 ---@field powershell_es lspconfig.options.powershell_es
+---@field prettier lspconfig.options.prettier
 ---@field psalm lspconfig.options.psalm
 ---@field puppet lspconfig.options.puppet
 ---@field purescriptls lspconfig.options.purescriptls
@@ -558,6 +602,7 @@ lspconfig.zls = {
 ---@field svelte lspconfig.options.svelte
 ---@field svlangserver lspconfig.options.svlangserver
 ---@field tailwindcss lspconfig.options.tailwindcss
+---@field taplo lspconfig.options.taplo
 ---@field terraformls lspconfig.options.terraformls
 ---@field tsserver lspconfig.options.tsserver
 ---@field volar lspconfig.options.volar
@@ -572,6 +617,7 @@ lspconfig.zls = {
 ---@field als lspconfig.settings.als
 ---@field astro lspconfig.settings.astro
 ---@field awkls lspconfig.settings.awkls
+---@field basedpyright lspconfig.settings.basedpyright
 ---@field bashls lspconfig.settings.bashls
 ---@field clangd lspconfig.settings.clangd
 ---@field cssls lspconfig.settings.cssls
@@ -582,6 +628,7 @@ lspconfig.zls = {
 ---@field eslint lspconfig.settings.eslint
 ---@field flow lspconfig.settings.flow
 ---@field fsautocomplete lspconfig.settings.fsautocomplete
+---@field gopls lspconfig.settings.gopls
 ---@field grammarly lspconfig.settings.grammarly
 ---@field haxe_language_server lspconfig.settings.haxe_language_server
 ---@field hhvm lspconfig.settings.hhvm
@@ -596,11 +643,13 @@ lspconfig.zls = {
 ---@field ltex lspconfig.settings.ltex
 ---@field lua_ls lspconfig.settings.lua_ls
 ---@field luau_lsp lspconfig.settings.luau_lsp
+---@field nil_ls lspconfig.settings.nil_ls
 ---@field omnisharp lspconfig.settings.omnisharp
 ---@field perlls lspconfig.settings.perlls
 ---@field perlnavigator lspconfig.settings.perlnavigator
 ---@field perlpls lspconfig.settings.perlpls
 ---@field powershell_es lspconfig.settings.powershell_es
+---@field prettier lspconfig.settings.prettier
 ---@field psalm lspconfig.settings.psalm
 ---@field puppet lspconfig.settings.puppet
 ---@field purescriptls lspconfig.settings.purescriptls
@@ -621,6 +670,7 @@ lspconfig.zls = {
 ---@field svelte lspconfig.settings.svelte
 ---@field svlangserver lspconfig.settings.svlangserver
 ---@field tailwindcss lspconfig.settings.tailwindcss
+---@field taplo lspconfig.settings.taplo
 ---@field terraformls lspconfig.settings.terraformls
 ---@field tsserver lspconfig.settings.tsserver
 ---@field volar lspconfig.settings.volar

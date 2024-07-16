@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Nix language support - syntax highlighting, formatting, and error reporting.",
+  "properties": {
+    "nix.enableLanguageServer": {
+      "default": false,
+      "description": "Use LSP instead of nix-instantiate and nixpkgs-fmt.",
+      "type": "boolean"
+    },
+    "nix.formatterPath": {
+      "default": "nixpkgs-fmt",
+      "description": "Location of the nix formatter command.",
+      "type": [
+        "string",
+        "array"
+      ]
+    },
+    "nix.serverPath": {
+      "default": "nil",
+      "description": "Location of the nix language server command.",
+      "type": "string"
+    },
+    "nix.serverSettings": {
+      "default": {},
+      "description": "Settings passed to the language server on configuration requests.",
+      "type": "object"
+    }
+  }
+}

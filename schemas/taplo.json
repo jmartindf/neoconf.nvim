@@ -1,0 +1,234 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Fully-featured TOML support",
+  "properties": {
+    "evenBetterToml.completion.maxKeys": {
+      "default": 5,
+      "description": "The maximum amount of keys in a dotted key to display during completion, 0 effectively disables key completions.",
+      "minimum": 0,
+      "scope": "resource",
+      "type": "integer"
+    },
+    "evenBetterToml.formatter.alignComments": {
+      "default": null,
+      "description": "Align consecutive comments after entries and items vertically. This applies to comments that are after entries or array items",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.alignEntries": {
+      "default": null,
+      "description": "Align entries vertically. Entries that have table headers, comments, or blank lines between them are not aligned.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.allowedBlankLines": {
+      "default": null,
+      "description": "The maximum amount of consecutive blank lines allowed.",
+      "scope": "resource",
+      "type": "number"
+    },
+    "evenBetterToml.formatter.arrayAutoCollapse": {
+      "default": null,
+      "description": "Automatically collapse arrays if they fit in one line.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.arrayAutoExpand": {
+      "default": null,
+      "description": "Automatically expand arrays to multiple lines.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.arrayTrailingComma": {
+      "default": null,
+      "description": "Put trailing commas for multiline arrays.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.columnWidth": {
+      "default": null,
+      "description": "Target maximum column width after which arrays are expanded into new lines.",
+      "scope": "resource",
+      "type": "number"
+    },
+    "evenBetterToml.formatter.compactArrays": {
+      "default": null,
+      "description": "Omit whitespace padding inside single-line arrays.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.compactEntries": {
+      "default": null,
+      "description": "Omit whitespace around `=`.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.compactInlineTables": {
+      "default": null,
+      "description": "Omit whitespace padding inside inline tables.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.crlf": {
+      "default": null,
+      "description": "Use CRLF line endings.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.indentEntries": {
+      "default": null,
+      "description": "Indent entries under tables.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.indentString": {
+      "default": null,
+      "description": "Indentation to use, should be tabs or spaces but technically could be anything.",
+      "scope": "resource",
+      "type": "string"
+    },
+    "evenBetterToml.formatter.indentTables": {
+      "default": null,
+      "description": "Indent subtables if they come in order.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.inlineTableExpand": {
+      "default": null,
+      "description": "Expand values inside in line tables.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.reorderArrays": {
+      "default": null,
+      "description": "Alphabetically reorder array values that are not separated by blank lines.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.reorderKeys": {
+      "default": null,
+      "description": "Alphabetically reorder keys that are not separated by blank lines.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.formatter.trailingNewline": {
+      "default": null,
+      "description": "Add trailing newline to the source.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.rules": {
+      "default": [],
+      "markdownDescription": "Array of Taplo rules in JSON format, see [Configuration File - Rules](https://taplo.tamasfe.dev/configuration/file.html#rules). The rules given here are appended to existing rules from config files, if any. There is no conversion done, all object keys must be snake_case, including formatting rules.",
+      "scope": "resource",
+      "type": "array"
+    },
+    "evenBetterToml.schema.associations": {
+      "default": {},
+      "description": "Document and schema associations.",
+      "markdownDescription": "Additional document and schema associations. \n\n The key must be a regular expression, this pattern is used to associate schemas with absolute document URIs. Overlapping patterns result in undefined behaviour and either matching schema can be used. \n\n The value must be an absolute URI to the JSON schema, for supported values and more information [read here](https://taplo.tamasfe.dev/configuration#visual-studio-code).",
+      "scope": "resource",
+      "type": "object"
+    },
+    "evenBetterToml.schema.cache.diskExpiration": {
+      "default": 600,
+      "description": "The amount of seconds after which cached catalogs and schemas expire and will be attempted to be fetched again.",
+      "minimum": 0,
+      "scope": "resource",
+      "type": "integer"
+    },
+    "evenBetterToml.schema.cache.memoryExpiration": {
+      "default": 60,
+      "description": "The amount of seconds after which schemas will be invalidated from memory.",
+      "markdownDescription": "The amount of seconds after which schemas will be invalidated from memory. \n**NOTE**: setting too low values will cause performance issues and validation of some schemas will fail.",
+      "minimum": 0,
+      "scope": "resource",
+      "type": "integer"
+    },
+    "evenBetterToml.schema.catalogs": {
+      "default": [
+        "https://www.schemastore.org/api/json/catalog.json"
+      ],
+      "description": "A list of URLs to schema catalogs where schemas and associations can be fetched from",
+      "items": {
+        "type": "string"
+      },
+      "scope": "resource",
+      "type": "array"
+    },
+    "evenBetterToml.schema.enabled": {
+      "default": true,
+      "description": "Enable completion and validation based on JSON schemas.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.schema.links": {
+      "default": false,
+      "description": "Whether to show clickable links for keys in the editor.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.semanticTokens": {
+      "default": false,
+      "description": "Enable semantic tokens for inline table and array keys.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.syntax.semanticTokens": {
+      "default": true,
+      "description": "Whether to enable semantic tokens for tables and arrays.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.taplo.bundled": {
+      "default": true,
+      "description": "Use the bundled taplo language server. If set to `false`, the `taplo` executable must be found in PATH or must be set in `evenBetterToml.taplo.path`.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.taplo.configFile.enabled": {
+      "default": true,
+      "description": "Whether to enable the usage of a Taplo configuration file.",
+      "scope": "resource",
+      "type": "boolean"
+    },
+    "evenBetterToml.taplo.configFile.path": {
+      "default": null,
+      "description": "An absolute, or workspace relative path to the Taplo configuration file.",
+      "scope": "resource",
+      "type": "string"
+    },
+    "evenBetterToml.taplo.environment": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "description": "Environment variables for Taplo.",
+      "scope": "resource",
+      "type": [
+        "object"
+      ]
+    },
+    "evenBetterToml.taplo.extraArgs": {
+      "default": [],
+      "description": "Additional arguments for Taplo. Has no effect for the bundled LSP.",
+      "items": {
+        "type": "string"
+      },
+      "scope": "resource",
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "evenBetterToml.taplo.path": {
+      "default": null,
+      "description": "An absolute path to the `taplo` executable. `evenBetterToml.taplo.bundled` needs to be set to `false` for this to have any effect.",
+      "scope": "resource",
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

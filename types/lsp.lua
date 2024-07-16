@@ -159,6 +159,644 @@
 ---@class lspconfig.settings.awkls
 ---@field awk-ide-vscode _.lspconfig.settings.awkls.Awk-ide-vscode
 
+-- Allows a user to override the severity levels for individual diagnostics. Use the rule name as a key and one of "error", "warning", "information", "none", `true` (alias for "error") or `false` (alias for "none") as value. The default value shown for each diagnostic is the default when "basedpyright.analysis.typeCheckingMode" is set to "standard". See [here](https://github.com/detachhead/basedpyright/blob/main/docs/configuration.md#diagnostic-rule-defaults) for defaults for each type checking mode ("off", "basic", "standard", "strict", and "all").
+---@class _.lspconfig.settings.basedpyright.DiagnosticSeverityOverrides
+-- Diagnostics for an attempt to instantiate an abstract or protocol class or use an abstract method.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportAbstractUsage "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for anything with the `Any` type
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportAny "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for a type incompatibility for an argument to a call.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportArgumentType "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for 'assert' statement that will provably always assert. This can be indicative of a programming error.
+-- 
+-- ```lua
+-- default = "warning"
+-- ```
+---@field reportAssertAlwaysTrue "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for a type incompatibility detected by a typing.assert_type call.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportAssertTypeFailure "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for type incompatibilities for assignments.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportAssignmentType "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for issues involving attribute accesses.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportAttributeAccessIssue "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for function calls within a default value initialization expression. Such calls can mask expensive operations that are performed at module initialization time.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportCallInDefaultInitializer "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for issues involving call expressions and arguments.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportCallIssue "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for attempts to redefine variables whose names are all-caps with underscores and numerals.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportConstantRedefinition "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for use of deprecated classes or functions.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportDeprecated "none" | "deprecated" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an imported symbol or module that is imported more than once.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportDuplicateImport "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for member accesses on functions.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportFunctionMemberAccess "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for general type inconsistencies, unsupported operations, argument/parameter mismatches, etc. Covers all of the basic type-checking rules not covered by other rules. Does not include syntax errors.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportGeneralTypeIssues "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for `# type: ignore` and `# pyright: ignore` comments without specifying a rule
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportIgnoreCommentWithoutRule "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for overridden methods that do not include an `@override` decorator.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportImplicitOverride "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for non-relative imports that do not specify the full path to the module
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportImplicitRelativeImport "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for two or more string literals that follow each other, indicating an implicit concatenation. This is considered a bad practice and often masks bugs such as missing commas.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportImplicitStringConcatenation "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for cyclical import chains. These are not errors in Python, but they do slow down type analysis and often hint at architectural layering issues. Generally, they should be avoided.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportImportCycles "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for methods that override a method of the same name in a base class in an incompatible manner (wrong number of parameters, incompatible parameter types, or incompatible return type).
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportIncompatibleMethodOverride "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for overrides in subclasses that redefine a variable in an incompatible way.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportIncompatibleVariableOverride "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for the use of a module-level “__getattr__” function, indicating that the stub is incomplete.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportIncompleteStub "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for __init__ and __new__ methods whose signatures are inconsistent.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportInconsistentConstructor "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for inconsistencies between function overload signatures and implementation.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportInconsistentOverload "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics related to index operations and expressions.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportIndexIssue "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for `cast`s to non-overlapping types
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportInvalidCast "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for invalid escape sequences used within string literals. The Python specification indicates that such sequences will generate a syntax error in future versions.
+-- 
+-- ```lua
+-- default = "warning"
+-- ```
+---@field reportInvalidStringEscapeSequence "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for type stub statements that do not conform to PEP 484.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportInvalidStubStatement "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for invalid type argument usage.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportInvalidTypeArguments "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for type expression that uses an invalid form.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportInvalidTypeForm "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for improper use of type variables in a function signature.
+-- 
+-- ```lua
+-- default = "warning"
+-- ```
+---@field reportInvalidTypeVarUse "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for 'match' statements that do not exhaustively match all possible values.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportMatchNotExhaustive "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for imports that have no corresponding imported python file or type stub file.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportMissingImports "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for imports that have no corresponding source file. This happens when a type stub is found, but the module source file was not found, indicating that the code may fail at runtime when using this execution environment. Type checking will be done using the type stub.
+-- 
+-- ```lua
+-- default = "warning"
+-- ```
+---@field reportMissingModuleSource "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for parameters that are missing a type annotation.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportMissingParameterType "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for missing call to parent class for inherited `__init__` methods.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportMissingSuperCall "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for generic class reference with missing type arguments.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportMissingTypeArgument "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for imports that have no corresponding type stub file (either a typeshed file or a custom type stub). The type checker requires type stubs to do its best job at analysis.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportMissingTypeStubs "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an overloaded function or method with a missing implementation.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportNoOverloadImplementation "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for related to unary or binary operators.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportOperatorIssue "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an attempt to call a variable with an Optional type.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportOptionalCall "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an attempt to use an Optional type as a context manager (as a parameter to a with statement).
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportOptionalContextManager "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an attempt to use an Optional type as an iterable value (e.g. within a for statement).
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportOptionalIterable "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an attempt to access a member of a variable with an Optional type.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportOptionalMemberAccess "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an attempt to use an Optional type as an operand to a binary or unary operator (like '+', '==', 'or', 'not').
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportOptionalOperand "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an attempt to subscript (index) a variable with an Optional type.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportOptionalSubscript "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for function overloads that overlap in signature and obscure each other or have incompatible return types.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportOverlappingOverload "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for the use of variables that may be unbound on some code paths.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportPossiblyUnboundVariable "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for incorrect usage of symbol imported from a "py.typed" module that is not re-exported from that module.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportPrivateImportUsage "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for incorrect usage of symbol imported from a non-"py.typed" module that is not re-exported from that module. Should be used along with `reportNonPrivateImportUsage`
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportPrivateLocalImportUsage "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for incorrect usage of private or protected variables or functions. Protected class members begin with a single underscore _ and can be accessed only by subclasses. Private class members begin with a double underscore but do not end in a double underscore and can be accessed only within the declaring class. Variables and functions declared outside of a class are considered private if their names start with either a single or double underscore, and they cannot be accessed outside of the declaring module.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportPrivateUsage "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for property whose setter and getter have mismatched types.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportPropertyTypeMismatch "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an attempt to declare the type of a symbol multiple times.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportRedeclaration "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics related to function return type compatibility.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportReturnType "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for a missing or misnamed “self” parameter in instance methods and “cls” parameter in class methods. Instance methods in metaclasses (classes that derive from “type”) are allowed to use “cls” for instance methods.
+-- 
+-- ```lua
+-- default = "warning"
+-- ```
+---@field reportSelfClsParameterName "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for files that are overriding a module in the stdlib.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportShadowedImports "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for usage of deprecated type comments.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportTypeCommentUsage "none" | "deprecated" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an attempt to access a non-required key within a TypedDict without a check for its presence.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportTypedDictNotRequiredAccess "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for the use of unbound variables.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportUnboundVariable "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for undefined variables.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportUndefinedVariable "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for the use of an unhashable object in a container that requires hashability.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportUnhashable "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for instance variables that are not declared or initialized within class body or `__init__` method.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUninitializedInstanceVariable "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for call arguments for functions or methods that have an unknown type.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnknownArgumentType "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for input or return parameters for lambdas that have an unknown type.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnknownLambdaType "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for class or instance variables that have an unknown type.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnknownMemberType "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for input or return parameters for functions or methods that have an unknown type.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnknownParameterType "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for variables that have an unknown type..
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnknownVariableType "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for 'cast' calls that are statically determined to be unnecessary. Such calls are sometimes indicative of a programming error.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnnecessaryCast "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for '==' and '!=' comparisons that are statically determined to be unnecessary. Such calls are sometimes indicative of a programming error.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnnecessaryComparison "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for 'in' operation that is statically determined to be unnecessary. Such operations are sometimes indicative of a programming error.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnnecessaryContains "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for 'isinstance' or 'issubclass' calls where the result is statically determined to be always true. Such calls are often indicative of a programming error.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnnecessaryIsInstance "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for '# type: ignore' comments that have no effect.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnnecessaryTypeIgnoreComment "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for unreachable code.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnreachable "none" | "unreachable" | "information" | "warning" | "error" | true | false
+-- Diagnostics for multiple inheritance where a base class's constructor may not get called
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnsafeMultipleInheritance "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for unsupported operations performed on __all__.
+-- 
+-- ```lua
+-- default = "warning"
+-- ```
+---@field reportUnsupportedDunderAll "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for base classes whose type cannot be determined statically. These obscure the class type, defeating many type analysis features.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUntypedBaseClass "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for class decorators that have no type annotations. These obscure the class type, defeating many type analysis features.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUntypedClassDecorator "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for function decorators that have no type annotations. These obscure the function type, defeating many type analysis features.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUntypedFunctionDecorator "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics when “namedtuple” is used rather than “NamedTuple”. The former contains no type information, whereas the latter does.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUntypedNamedTuple "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for call expressions whose results are not consumed and are not None.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnusedCallResult "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for a class with a private name (starting with an underscore) that is not accessed.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnusedClass "none" | "unused" | "information" | "warning" | "error" | true | false
+-- Diagnostics for call expressions that return a Coroutine and whose results are not consumed.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportUnusedCoroutine "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for unreachable except clause.
+-- 
+-- ```lua
+-- default = "error"
+-- ```
+---@field reportUnusedExcept "none" | "unreachable" | "information" | "warning" | "error" | true | false
+-- Diagnostics for simple expressions whose value is not used in any way.
+-- 
+-- ```lua
+-- default = "warning"
+-- ```
+---@field reportUnusedExpression "none" | "information" | "warning" | "error" | true | false
+-- Diagnostics for a function or method with a private name (starting with an underscore) that is not accessed.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnusedFunction "none" | "unused" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an imported symbol that is not referenced within that file.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnusedImport "none" | "unused" | "information" | "warning" | "error" | true | false
+-- Diagnostics for a variable that is not accessed.
+-- 
+-- ```lua
+-- default = "none"
+-- ```
+---@field reportUnusedVariable "none" | "unused" | "information" | "warning" | "error" | true | false
+-- Diagnostics for an wildcard import from an external library.
+-- 
+-- ```lua
+-- default = "warning"
+-- ```
+---@field reportWildcardImportFromLibrary "none" | "information" | "warning" | "error" | true | false
+
+---@class _.lspconfig.settings.basedpyright.Analysis
+-- Offer auto-import completions.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field autoImportCompletions boolean
+-- Automatically add common search paths like 'src'?
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field autoSearchPaths boolean
+-- ```lua
+-- default = "openFilesOnly"
+-- ```
+---@field diagnosticMode "openFilesOnly" | "workspace"
+-- Allows a user to override the severity levels for individual diagnostics. Use the rule name as a key and one of "error", "warning", "information", "none", `true` (alias for "error") or `false` (alias for "none") as value. The default value shown for each diagnostic is the default when "basedpyright.analysis.typeCheckingMode" is set to "standard". See [here](https://github.com/detachhead/basedpyright/blob/main/docs/configuration.md#diagnostic-rule-defaults) for defaults for each type checking mode ("off", "basic", "standard", "strict", and "all").
+---@field diagnosticSeverityOverrides _.lspconfig.settings.basedpyright.DiagnosticSeverityOverrides
+-- Paths of directories or files that should not be included. These override the include directories, allowing specific subdirectories to be excluded. Note that files in the exclude paths may still be included in the analysis if they are referenced (imported) by source files that are not excluded. Paths may contain wildcard characters ** (a directory or multiple levels of directories), * (a sequence of zero or more characters), or ? (a single character). If no exclude paths are specified, pyright automatically excludes the following: `**/node_modules`, `**/__pycache__`, `.git` and any virtual environment directories.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field exclude string[]
+-- Additional import search resolution paths
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field extraPaths string[]
+-- Paths of directories or files whose diagnostic output (errors and warnings) should be suppressed even if they are an included file or within the transitive closure of an included file. Paths may contain wildcard characters ** (a directory or multiple levels of directories), * (a sequence of zero or more characters), or ? (a single character). If no value is provided, the value of python.linting.ignorePatterns (if set) will be used.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field ignore string[]
+-- Paths of directories or files that should be included. If no paths are specified, pyright defaults to the workspace root directory. Paths may contain wildcard characters ** (a directory or multiple levels of directories), * (a sequence of zero or more characters), or ? (a single character).
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field include string[]
+-- Specifies the level of logging for the Output panel
+-- 
+-- ```lua
+-- default = "Information"
+-- ```
+---@field logLevel "Error" | "Warning" | "Information" | "Trace"
+-- Path to directory containing custom type stub files.
+-- 
+-- ```lua
+-- default = "typings"
+-- ```
+---@field stubPath string
+-- Defines the default rule set for type checking.
+-- 
+-- ```lua
+-- default = "all"
+-- ```
+---@field typeCheckingMode "off" | "basic" | "standard" | "strict" | "all"
+-- Paths to look for typeshed modules.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field typeshedPaths string[]
+-- Use library implementations to extract type information when type stub is not present.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field useLibraryCodeForTypes boolean
+
+---@class _.lspconfig.settings.basedpyright.Basedpyright
+---@field analysis _.lspconfig.settings.basedpyright.Analysis
+-- Disables type completion, definitions, and references.
+---@field disableLanguageServices boolean
+-- Disables the “Organize Imports” command.
+---@field disableOrganizeImports boolean
+-- Disable hint diagnostics with special hints for grayed-out or strike-through text.
+---@field disableTaggedHints boolean
+-- Whether to use the version of pyright installed in the project (recommended) or the one bundled with the extension (not recommended).
+-- 
+-- ```lua
+-- default = "fromEnvironment"
+-- ```
+---@field importStrategy "fromEnvironment" | "useBundled"
+
+---@class _.lspconfig.settings.basedpyright.Python
+-- Path to Python, you can use a custom version of Python.
+-- 
+-- ```lua
+-- default = "python"
+-- ```
+---@field pythonPath string
+-- Path to folder with a list of Virtual Environments.
+-- 
+-- ```lua
+-- default = ""
+-- ```
+---@field venvPath string
+
+---@class lspconfig.settings.basedpyright
+---@field basedpyright _.lspconfig.settings.basedpyright.Basedpyright
+---@field python _.lspconfig.settings.basedpyright.Python
+
 ---@class _.lspconfig.settings.bashls.Shfmt
 -- Allow boolean operators (like && and ||) to start a line.
 ---@field binaryNextLine boolean
@@ -2750,6 +3388,2168 @@
 ---@class lspconfig.settings.fsautocomplete
 ---@field FSharp _.lspconfig.settings.fsautocomplete.FSharp
 ---@field Fsharp _.lspconfig.settings.fsautocomplete.Fsharp
+
+-- Tags and options configured here will be used by the Add Tags command to add tags to struct fields. If promptForTags is true, then user will be prompted for tags and options. By default, json tags are added.
+-- 
+-- ```lua
+-- default = {
+--   options = "json=omitempty",
+--   promptForTags = false,
+--   tags = "json",
+--   template = "",
+--   transform = "snakecase"
+-- }
+-- ```
+---@class _.lspconfig.settings.gopls.AddTags
+-- Comma separated tag=options pairs to be used by Go: Add Tags command
+-- 
+-- ```lua
+-- default = "json=omitempty"
+-- ```
+---@field options string
+-- If true, Go: Add Tags command will prompt the user to provide tags, options, transform values instead of using the configured values
+---@field promptForTags boolean
+-- Comma separated tags to be used by Go: Add Tags command
+-- 
+-- ```lua
+-- default = "json"
+-- ```
+---@field tags string
+-- Custom format used by Go: Add Tags command for the tag value to be applied
+-- 
+-- ```lua
+-- default = ""
+-- ```
+---@field template string
+-- Transformation rule used by Go: Add Tags command to add tags
+-- 
+-- ```lua
+-- default = "snakecase"
+-- ```
+---@field transform "snakecase" | "camelcase" | "lispcase" | "pascalcase" | "keep"
+
+-- Alternate tools or alternate paths for the same tools used by the Go extension. Provide either absolute path or the name of the binary in GOPATH/bin, GOROOT/bin or PATH. Useful when you want to use wrapper script for the Go tools.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@class _.lspconfig.settings.gopls.AlternateTools
+-- Custom formatter to use instead of the language server. This should be used with the `custom` option in `#go.formatTool#`.
+-- 
+-- ```lua
+-- default = ""
+-- ```
+---@field customFormatter string
+-- Alternate tool to use instead of the dlv binary or alternate path to use for the dlv binary.
+-- 
+-- ```lua
+-- default = "dlv"
+-- ```
+---@field dlv string
+-- Alternate tool to use instead of the go binary or alternate path to use for the go binary.
+-- 
+-- ```lua
+-- default = "go"
+-- ```
+---@field go string
+-- Alternate tool to use instead of the gopls binary or alternate path to use for the gopls binary.
+-- 
+-- ```lua
+-- default = "gopls"
+-- ```
+---@field gopls string
+
+-- This option lets you choose the way to display code coverage. Choose either to highlight the complete line or to show a decorator in the gutter. You can customize the colors and borders for the former and the style for the latter.
+-- 
+-- ```lua
+-- default = {
+--   coveredBorderColor = "rgba(64,128,128,0.5)",
+--   coveredGutterStyle = "blockblue",
+--   coveredHighlightColor = "rgba(64,128,128,0.5)",
+--   type = "highlight",
+--   uncoveredBorderColor = "rgba(128,64,64,0.25)",
+--   uncoveredGutterStyle = "slashyellow",
+--   uncoveredHighlightColor = "rgba(128,64,64,0.25)"
+-- }
+-- ```
+---@class _.lspconfig.settings.gopls.CoverageDecorator
+-- Color to use for the border of covered code.
+---@field coveredBorderColor string
+-- Gutter style to indicate covered code.
+---@field coveredGutterStyle "blockblue" | "blockred" | "blockgreen" | "blockyellow" | "slashred" | "slashgreen" | "slashblue" | "slashyellow" | "verticalred" | "verticalgreen" | "verticalblue" | "verticalyellow"
+-- Color in the rgba format to use to highlight covered code.
+---@field coveredHighlightColor string
+---@field type "highlight" | "gutter"
+-- Color to use for the border of uncovered code.
+---@field uncoveredBorderColor string
+-- Gutter style to indicate covered code.
+---@field uncoveredGutterStyle "blockblue" | "blockred" | "blockgreen" | "blockyellow" | "slashred" | "slashgreen" | "slashblue" | "slashyellow" | "verticalred" | "verticalgreen" | "verticalblue" | "verticalyellow"
+-- Color in the rgba format to use to highlight uncovered code.
+---@field uncoveredHighlightColor string
+
+-- LoadConfig describes to delve, how to load values from target's memory. Ignored by 'dlv-dap'.
+-- 
+-- ```lua
+-- default = {
+--   followPointers = true,
+--   maxArrayValues = 64,
+--   maxStringLen = 64,
+--   maxStructFields = -1,
+--   maxVariableRecurse = 1
+-- }
+-- ```
+---@class _.lspconfig.settings.gopls.DlvLoadConfig
+-- FollowPointers requests pointers to be automatically dereferenced
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field followPointers boolean
+-- MaxArrayValues is the maximum number of elements read from an array, a slice or a map
+-- 
+-- ```lua
+-- default = 64
+-- ```
+---@field maxArrayValues number
+-- MaxStringLen is the maximum number of bytes read from a string
+-- 
+-- ```lua
+-- default = 64
+-- ```
+---@field maxStringLen number
+-- MaxStructFields is the maximum number of fields read from a struct, -1 will read all fields
+-- 
+-- ```lua
+-- default = -1
+-- ```
+---@field maxStructFields number
+-- MaxVariableRecurse is how far to recurse when evaluating nested types
+-- 
+-- ```lua
+-- default = 1
+-- ```
+---@field maxVariableRecurse number
+
+-- Delve settings that applies to all debugging sessions. Debug configuration in the launch.json file will override these values.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@class _.lspconfig.settings.gopls.DelveConfig
+-- Delve Api Version to use. Default value is 2. This applies only when using the 'legacy' debug adapter.
+-- 
+-- ```lua
+-- default = 2
+-- ```
+---@field apiVersion 1 | 2
+-- Select which debug adapter to use by default. This is also used for choosing which debug adapter to use when no launch.json is present and with codelenses.
+-- 
+-- ```lua
+-- default = "dlv-dap"
+-- ```
+---@field debugAdapter "legacy" | "dlv-dap"
+-- Extra flags for `dlv`. See `dlv help` for the full list of supported. Flags such as `--log-output`, `--log`, `--log-dest`, `--api-version`, `--output`, `--backend` already have corresponding properties in the debug configuration, and flags such as `--listen` and `--headless` are used internally. If they are specified in `dlvFlags`, they may be ignored or cause an error.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field dlvFlags string[]
+-- LoadConfig describes to delve, how to load values from target's memory. Ignored by 'dlv-dap'.
+-- 
+-- ```lua
+-- default = {
+--   followPointers = true,
+--   maxArrayValues = 64,
+--   maxStringLen = 64,
+--   maxStructFields = -1,
+--   maxVariableRecurse = 1
+-- }
+-- ```
+---@field dlvLoadConfig _.lspconfig.settings.gopls.DlvLoadConfig
+-- Boolean value to indicate whether system goroutines should be hidden from call stack view.
+---@field hideSystemGoroutines boolean
+-- Comma separated list of components that should produce debug output. Maps to dlv's `--log-output` flag. Check `dlv log` for details.
+-- 
+-- ```lua
+-- default = "debugger"
+-- ```
+---@field logOutput "debugger" | "gdbwire" | "lldbout" | "debuglineerr" | "rpc" | "dap"
+-- Boolean value to indicate whether global package variables should be shown in the variables pane or not.
+---@field showGlobalVariables boolean
+-- Show log output from the delve debugger. Maps to dlv's `--log` flag.
+---@field showLog boolean
+-- Boolean value to indicate whether register variables should be shown in the variables pane or not.
+---@field showRegisters boolean
+-- An array of mappings from a local path to the remote path that is used by the debuggee. The debug adapter will replace the local path with the remote path in all of the calls. Overriden by `remotePath` (in attach request).
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field substitutePath object[]
+
+---@class _.lspconfig.settings.gopls.Diagnostic
+-- (Experimental) vulncheck enables vulnerability scanning.
+-- 
+-- 
+-- ```lua
+-- default = "Off"
+-- ```
+---@field vulncheck "Imports" | "Off"
+
+-- Experimental Feature: Enable/Disable entries from the context menu in the editor.
+-- 
+-- ```lua
+-- default = {
+--   addImport = true,
+--   addTags = true,
+--   benchmarkAtCursor = false,
+--   debugTestAtCursor = true,
+--   fillStruct = false,
+--   generateTestForFile = false,
+--   generateTestForFunction = true,
+--   generateTestForPackage = false,
+--   playground = true,
+--   removeTags = false,
+--   testAtCursor = true,
+--   testCoverage = true,
+--   testFile = false,
+--   testPackage = false,
+--   toggleTestFile = true
+-- }
+-- ```
+---@class _.lspconfig.settings.gopls.EditorContextMenuCommands
+-- If true, adds command to import a package to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field addImport boolean
+-- If true, adds command to add configured tags from struct fields to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field addTags boolean
+-- If true, adds command to benchmark the test under the cursor to the editor context menu
+---@field benchmarkAtCursor boolean
+-- If true, adds command to debug the test under the cursor to the editor context menu
+---@field debugTestAtCursor boolean
+-- If true, adds command to fill struct literal with default values to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field fillStruct boolean
+-- If true, adds command to generate unit tests for current file to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field generateTestForFile boolean
+-- If true, adds command to generate unit tests for function under the cursor to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field generateTestForFunction boolean
+-- If true, adds command to generate unit tests for current package to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field generateTestForPackage boolean
+-- If true, adds command to upload the current file or selection to the Go Playground
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field playground boolean
+-- If true, adds command to remove configured tags from struct fields to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field removeTags boolean
+-- If true, adds command to run the test under the cursor to the editor context menu
+---@field testAtCursor boolean
+-- If true, adds command to run test coverage to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field testCoverage boolean
+-- If true, adds command to run all tests in the current file to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field testFile boolean
+-- If true, adds command to run all tests in the current package to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field testPackage boolean
+-- If true, adds command to toggle between a Go file and its test file to the editor context menu
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field toggleTestFile boolean
+
+-- Feature level setting to enable/disable code lens for references and run/debug tests
+-- 
+-- ```lua
+-- default = {
+--   runtest = true
+-- }
+-- ```
+---@class _.lspconfig.settings.gopls.EnableCodeLens
+-- If true, enables code lens for running and debugging tests
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field runtest boolean
+
+---@class _.lspconfig.settings.gopls.InlayHints
+-- Enable/disable inlay hints for variable types in assign statements:
+-- ```go
+-- 	i/* int*/, j/* int*/ := 0, len(r)-1
+-- ```
+---@field assignVariableTypes boolean
+-- Enable/disable inlay hints for composite literal field names:
+-- ```go
+-- 	{/*in: */"Hello, world", /*want: */"dlrow ,olleH"}
+-- ```
+---@field compositeLiteralFields boolean
+-- Enable/disable inlay hints for composite literal types:
+-- ```go
+-- 	for _, c := range []struct {
+-- 		in, want string
+-- 	}{
+-- 		/*struct{ in string; want string }*/{"Hello, world", "dlrow ,olleH"},
+-- 	}
+-- ```
+---@field compositeLiteralTypes boolean
+-- Enable/disable inlay hints for constant values:
+-- ```go
+-- 	const (
+-- 		KindNone   Kind = iota/* = 0*/
+-- 		KindPrint/*  = 1*/
+-- 		KindPrintf/* = 2*/
+-- 		KindErrorf/* = 3*/
+-- 	)
+-- ```
+---@field constantValues boolean
+-- Enable/disable inlay hints for implicit type parameters on generic functions:
+-- ```go
+-- 	myFoo/*[int, string]*/(1, "hello")
+-- ```
+---@field functionTypeParameters boolean
+-- Enable/disable inlay hints for parameter names:
+-- ```go
+-- 	parseInt(/* str: */ "123", /* radix: */ 8)
+-- ```
+---@field parameterNames boolean
+-- Enable/disable inlay hints for variable types in range statements:
+-- ```go
+-- 	for k/* int*/, v/* string*/ := range []string{} {
+-- 		fmt.Println(k, v)
+-- 	}
+-- ```
+---@field rangeVariableTypes boolean
+
+---@class _.lspconfig.settings.gopls.Logging
+---@field level string
+
+-- The flags configured here will be passed through to command `goplay`
+-- 
+-- ```lua
+-- default = {
+--   openbrowser = true,
+--   run = true,
+--   share = true
+-- }
+-- ```
+---@class _.lspconfig.settings.gopls.Playground
+-- Whether to open the created Go Playground in the default browser
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field openbrowser boolean
+-- Whether to run the created Go Playground after creation
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field run boolean
+-- Whether to make the created Go Playground shareable
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field share boolean
+
+-- Tags and options configured here will be used by the Remove Tags command to remove tags to struct fields. If promptForTags is true, then user will be prompted for tags and options. By default, all tags and options will be removed.
+-- 
+-- ```lua
+-- default = {
+--   options = "",
+--   promptForTags = false,
+--   tags = ""
+-- }
+-- ```
+---@class _.lspconfig.settings.gopls.RemoveTags
+-- Comma separated tag=options pairs to be used by Go: Remove Tags command
+-- 
+-- ```lua
+-- default = "json=omitempty"
+-- ```
+---@field options string
+-- If true, Go: Remove Tags command will prompt the user to provide tags and options instead of using the configured values
+---@field promptForTags boolean
+-- Comma separated tags to be used by Go: Remove Tags command
+-- 
+-- ```lua
+-- default = "json"
+-- ```
+---@field tags string
+
+---@class _.lspconfig.settings.gopls.Survey
+-- Prompt for surveys, including the gopls survey and the Go developer survey.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field prompt boolean
+
+---@class _.lspconfig.settings.gopls.Tasks
+-- enable the default go build/test task provider.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field provideDefault boolean
+
+---@class _.lspconfig.settings.gopls.Terminal
+-- Apply the Go & PATH environment variables used by the extension to all integrated terminals.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field activateEnvironment boolean
+
+---@class _.lspconfig.settings.gopls.TestExplorer
+-- Run benchmarks when running all tests in a file or folder.
+---@field alwaysRunBenchmarks boolean
+-- Concatenate all test log messages for a given location into a single message.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field concatenateMessages boolean
+-- Enable the Go test explorer
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field enable boolean
+-- Present packages in the test explorer flat or nested.
+-- 
+-- ```lua
+-- default = "flat"
+-- ```
+---@field packageDisplayMode "flat" | "nested"
+-- Set the source location of dynamically discovered subtests to the location of the containing function. As a result, dynamically discovered subtests will be added to the gutter test widget of the containing function.
+---@field showDynamicSubtestsInEditor boolean
+-- Open the test output terminal when a test run is started.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field showOutput boolean
+
+---@class _.lspconfig.settings.gopls.ToolsManagement
+-- Automatically update the tools used by the extension, without prompting the user.
+---@field autoUpdate boolean
+-- Specify whether to prompt about new versions of Go and the Go tools (currently, only `gopls`) the extension depends on
+-- 
+-- ```lua
+-- default = "proxy"
+-- ```
+---@field checkForUpdates "proxy" | "local" | "off"
+-- The path to the `go` binary used to install the Go tools. If it's empty, the same `go` binary chosen for the project will be used for tool installation.
+-- 
+-- ```lua
+-- default = ""
+-- ```
+---@field go string
+
+---@class _.lspconfig.settings.gopls.Trace
+-- Trace the communication between VS Code and the Go language server.
+-- 
+-- ```lua
+-- default = "off"
+-- ```
+---@field server "off" | "messages" | "verbose"
+
+---@class _.lspconfig.settings.gopls.Go
+-- Tags and options configured here will be used by the Add Tags command to add tags to struct fields. If promptForTags is true, then user will be prompted for tags and options. By default, json tags are added.
+-- 
+-- ```lua
+-- default = {
+--   options = "json=omitempty",
+--   promptForTags = false,
+--   tags = "json",
+--   template = "",
+--   transform = "snakecase"
+-- }
+-- ```
+---@field addTags _.lspconfig.settings.gopls.AddTags
+-- Alternate tools or alternate paths for the same tools used by the Go extension. Provide either absolute path or the name of the binary in GOPATH/bin, GOROOT/bin or PATH. Useful when you want to use wrapper script for the Go tools.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field alternateTools _.lspconfig.settings.gopls.AlternateTools
+-- Flags to `go build`/`go test` used during build-on-save or running tests. (e.g. ["-ldflags='-s'"]) This is propagated to the language server if `gopls.build.buildFlags` is not specified.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field buildFlags string[]
+-- Compiles code on file save using 'go build' or 'go test -c'. Not applicable when using the language server.
+-- 
+-- ```lua
+-- default = "package"
+-- ```
+---@field buildOnSave "package" | "workspace" | "off"
+-- The Go build tags to use for all commands, that support a `-tags '...'` argument. When running tests, go.testTags will be used instead if it was set. This is propagated to the language server if `gopls.build.buildFlags` is not specified.
+-- 
+-- ```lua
+-- default = ""
+-- ```
+---@field buildTags string
+-- When generating code coverage, the value for -covermode. 'default' is the default value chosen by the 'go test' command.
+-- 
+-- ```lua
+-- default = "default"
+-- ```
+---@field coverMode "default" | "set" | "count" | "atomic"
+-- If true, runs 'go test -coverprofile' on save and shows test coverage.
+---@field coverOnSave boolean
+-- If true, shows test coverage when Go: Test Function at cursor command is run.
+---@field coverOnSingleTest boolean
+-- If true, shows test coverage when Go: Test Single File command is run.
+---@field coverOnSingleTestFile boolean
+-- If true, shows test coverage when Go: Test Package command is run.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field coverOnTestPackage boolean
+-- When generating code coverage, should counts be shown as --374--
+---@field coverShowCounts boolean
+-- This option lets you choose the way to display code coverage. Choose either to highlight the complete line or to show a decorator in the gutter. You can customize the colors and borders for the former and the style for the latter.
+-- 
+-- ```lua
+-- default = {
+--   coveredBorderColor = "rgba(64,128,128,0.5)",
+--   coveredGutterStyle = "blockblue",
+--   coveredHighlightColor = "rgba(64,128,128,0.5)",
+--   type = "highlight",
+--   uncoveredBorderColor = "rgba(128,64,64,0.25)",
+--   uncoveredGutterStyle = "slashyellow",
+--   uncoveredHighlightColor = "rgba(128,64,64,0.25)"
+-- }
+-- ```
+---@field coverageDecorator _.lspconfig.settings.gopls.CoverageDecorator
+-- Use these options to control whether only covered or only uncovered code or both should be highlighted after running test coverage
+-- 
+-- ```lua
+-- default = "showBothCoveredAndUncoveredCode"
+-- ```
+---@field coverageOptions "showCoveredCodeOnly" | "showUncoveredCodeOnly" | "showBothCoveredAndUncoveredCode"
+-- Delve settings that applies to all debugging sessions. Debug configuration in the launch.json file will override these values.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field delveConfig _.lspconfig.settings.gopls.DelveConfig
+---@field diagnostic _.lspconfig.settings.gopls.Diagnostic
+-- If true, tests will not run concurrently. When a new test run is started, the previous will be cancelled.
+---@field disableConcurrentTests boolean
+-- Experimental Feature: Enable/Disable entries from the context menu in the editor.
+-- 
+-- ```lua
+-- default = {
+--   addImport = true,
+--   addTags = true,
+--   benchmarkAtCursor = false,
+--   debugTestAtCursor = true,
+--   fillStruct = false,
+--   generateTestForFile = false,
+--   generateTestForFunction = true,
+--   generateTestForPackage = false,
+--   playground = true,
+--   removeTags = false,
+--   testAtCursor = true,
+--   testCoverage = true,
+--   testFile = false,
+--   testPackage = false,
+--   toggleTestFile = true
+-- }
+-- ```
+---@field editorContextMenuCommands _.lspconfig.settings.gopls.EditorContextMenuCommands
+-- Feature level setting to enable/disable code lens for references and run/debug tests
+-- 
+-- ```lua
+-- default = {
+--   runtest = true
+-- }
+-- ```
+---@field enableCodeLens _.lspconfig.settings.gopls.EnableCodeLens
+-- Flags to pass to format tool (e.g. ["-s"]). Not applicable when using the language server.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field formatFlags string[]
+-- When the language server is enabled and one of `default`/`gofmt`/`goimports`/`gofumpt` is chosen, the language server will handle formatting. If `custom` tool is selected, the extension will use the `customFormatter` tool in the `#go.alternateTools#` section.
+-- 
+-- ```lua
+-- default = "default"
+-- ```
+---@field formatTool "default" | "gofmt" | "goimports" | "goformat" | "gofumpt" | "custom"
+-- Additional command line flags to pass to `gotests` for generating tests.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field generateTestsFlags string[]
+-- Specify GOPATH here to override the one that is set as environment variable. The inferred GOPATH from workspace root overrides this, if go.inferGopath is set to true.
+---@field gopath string
+-- Specifies the GOROOT to use when no environment variable is set.
+---@field goroot string
+-- Infer GOPATH from the workspace root. This is ignored when using Go Modules.
+---@field inferGopath boolean
+---@field inlayHints _.lspconfig.settings.gopls.InlayHints
+-- If true, then `-i` flag will be passed to `go build` everytime the code is compiled. Since Go 1.10, setting this may be unnecessary unless you are in GOPATH mode and do not use the language server.
+---@field installDependenciesWhenBuilding boolean
+-- Flags like -rpc.trace and -logfile to be used while running the language server.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field languageServerFlags any[]
+-- Flags to pass to Lint tool (e.g. ["-min_confidence=.8"])
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field lintFlags string[]
+-- Lints code on file save using the configured Lint tool. Options are 'file', 'package', 'workspace' or 'off'.
+-- 
+-- ```lua
+-- default = "package"
+-- ```
+---@field lintOnSave "file" | "package" | "workspace" | "off"
+-- Specifies Lint tool name.
+-- 
+-- ```lua
+-- default = "staticcheck"
+-- ```
+---@field lintTool "staticcheck" | "golint" | "golangci-lint" | "revive"
+---@field logging _.lspconfig.settings.gopls.Logging
+-- The flags configured here will be passed through to command `goplay`
+-- 
+-- ```lua
+-- default = {
+--   openbrowser = true,
+--   run = true,
+--   share = true
+-- }
+-- ```
+---@field playground _.lspconfig.settings.gopls.Playground
+-- Tags and options configured here will be used by the Remove Tags command to remove tags to struct fields. If promptForTags is true, then user will be prompted for tags and options. By default, all tags and options will be removed.
+-- 
+-- ```lua
+-- default = {
+--   options = "",
+--   promptForTags = false,
+--   tags = ""
+-- }
+-- ```
+---@field removeTags _.lspconfig.settings.gopls.RemoveTags
+-- Specifies whether to show the Welcome experience on first install
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field showWelcome boolean
+---@field survey _.lspconfig.settings.gopls.Survey
+---@field tasks _.lspconfig.settings.gopls.Tasks
+---@field terminal _.lspconfig.settings.gopls.Terminal
+-- Absolute path to a file containing environment variables definitions. File contents should be of the form key=value.
+---@field testEnvFile string
+-- Environment variables that will be passed to the process that runs the Go tests
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field testEnvVars table
+---@field testExplorer _.lspconfig.settings.gopls.TestExplorer
+-- Flags to pass to `go test`. If null, then buildFlags will be used. This is not propagated to the language server.
+---@field testFlags string[]
+-- Run 'go test' on save for current package. It is not advised to set this to `true` when you have Auto Save enabled.
+---@field testOnSave boolean
+-- The Go build tags to use for when running tests. If null, then buildTags will be used.
+---@field testTags string
+-- Specifies the timeout for go test in ParseDuration format.
+-- 
+-- ```lua
+-- default = "30s"
+-- ```
+---@field testTimeout string
+-- Environment variables that will be passed to the tools that run the Go tools (e.g. CGO_CFLAGS) and debuggee process launched by Delve. Format as string key:value pairs. When debugging, merged with `envFile` and `env` values with precedence `env` > `envFile` > `go.toolsEnvVars`.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field toolsEnvVars table
+-- Location to install the Go tools that the extension depends on if you don't want them in your GOPATH.
+---@field toolsGopath string
+---@field toolsManagement _.lspconfig.settings.gopls.ToolsManagement
+---@field trace _.lspconfig.settings.gopls.Trace
+-- Enable intellisense, code navigation, refactoring, formatting & diagnostics for Go. The features are powered by the Go language server "gopls".
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field useLanguageServer boolean
+-- Flags to pass to `go tool vet` (e.g. ["-all", "-shadow"]). Not applicable when using the language server's diagnostics.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field vetFlags string[]
+-- Vets code on file save using 'go tool vet'. Not applicable when using the language server's diagnostics.
+-- 
+-- ```lua
+-- default = "package"
+-- ```
+---@field vetOnSave "package" | "workspace" | "off"
+
+-- codelenses overrides the enabled/disabled state of each of gopls'
+-- sources of [Code Lenses](codelenses.md).
+-- 
+-- Example Usage:
+-- 
+-- ```json5
+-- "gopls": {
+-- ...
+--   "codelenses": {
+--     "generate": false,  // Don't show the `go generate` lens.
+--     "gc_details": true  // Show a code lens toggling the display of gc's choices.
+--   }
+-- ...
+-- }
+-- ```
+-- 
+---@class _.lspconfig.settings.gopls.Ui.codelenses
+-- `"gc_details"`: Toggle display of Go compiler optimization decisions
+-- 
+-- This codelens source causes the `package` declaration of
+-- each file to be annotated with a command to toggle the
+-- state of the per-session variable that controls whether
+-- optimization decisions from the Go compiler (formerly known
+-- as "gc") should be displayed as diagnostics.
+-- 
+-- Optimization decisions include:
+-- - whether a variable escapes, and how escape is inferred;
+-- - whether a nil-pointer check is implied or eliminated;
+-- - whether a function can be inlined.
+-- 
+-- TODO(adonovan): this source is off by default because the
+-- annotation is annoying and because VS Code has a separate
+-- "Toggle gc details" command. Replace it with a Code Action
+-- ("Source action...").
+-- 
+---@field gc_details boolean
+-- `"generate"`: Run `go generate`
+-- 
+-- This codelens source annotates any `//go:generate` comments
+-- with commands to run `go generate` in this directory, on
+-- all directories recursively beneath this one.
+-- 
+-- See [Generating code](https://go.dev/blog/generate) for
+-- more details.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field generate boolean
+-- `"regenerate_cgo"`: Re-generate cgo declarations
+-- 
+-- This codelens source annotates an `import "C"` declaration
+-- with a command to re-run the [cgo
+-- command](https://pkg.go.dev/cmd/cgo) to regenerate the
+-- corresponding Go declarations.
+-- 
+-- Use this after editing the C code in comments attached to
+-- the import, or in C header files included by it.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field regenerate_cgo boolean
+-- `"run_govulncheck"`: Run govulncheck
+-- 
+-- This codelens source annotates the `module` directive in a
+-- go.mod file with a command to run Govulncheck.
+-- 
+-- [Govulncheck](https://go.dev/blog/vuln) is a static
+-- analysis tool that computes the set of functions reachable
+-- within your application, including dependencies;
+-- queries a database of known security vulnerabilities; and
+-- reports any potential problems it finds.
+-- 
+---@field run_govulncheck boolean
+-- `"test"`: Run tests and benchmarks
+-- 
+-- This codelens source annotates each `Test` and `Benchmark`
+-- function in a `*_test.go` file with a command to run it.
+-- 
+-- This source is off by default because VS Code has
+-- a client-side custom UI for testing, and because progress
+-- notifications are not a great UX for streamed test output.
+-- See:
+-- - golang/go#67400 for a discussion of this feature.
+-- - https://github.com/joaotavora/eglot/discussions/1402
+--   for an alternative approach.
+-- 
+---@field test boolean
+-- `"tidy"`: Tidy go.mod file
+-- 
+-- This codelens source annotates the `module` directive in a
+-- go.mod file with a command to run [`go mod
+-- tidy`](https://go.dev/ref/mod#go-mod-tidy), which ensures
+-- that the go.mod file matches the source code in the module.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field tidy boolean
+-- `"upgrade_dependency"`: Update dependencies
+-- 
+-- This codelens source annotates the `module` directive in a
+-- go.mod file with commands to:
+-- 
+-- - check for available upgrades,
+-- - upgrade direct dependencies, and
+-- - upgrade all dependencies transitively.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field upgrade_dependency boolean
+-- `"vendor"`: Update vendor directory
+-- 
+-- This codelens source annotates the `module` directive in a
+-- go.mod file with a command to run [`go mod
+-- vendor`](https://go.dev/ref/mod#go-mod-vendor), which
+-- creates or updates the directory named `vendor` in the
+-- module root so that it contains an up-to-date copy of all
+-- necessary package dependencies.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field vendor boolean
+
+-- analyses specify analyses that the user would like to enable or disable.
+-- A map of the names of analysis passes that should be enabled/disabled.
+-- A full list of analyzers that gopls uses can be found in
+-- [analyzers.md](https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md).
+-- 
+-- Example Usage:
+-- 
+-- ```json5
+-- ...
+-- "analyses": {
+--   "unreachable": false, // Disable the unreachable analyzer.
+--   "unusedvariable": true  // Enable the unusedvariable analyzer.
+-- }
+-- ...
+-- ```
+-- 
+---@class _.lspconfig.settings.gopls.Ui.diagnostic.analyses
+-- check for missing values after append
+-- 
+-- This checker reports calls to append that pass
+-- no values to be appended to the slice.
+-- 
+-- 	s := []string{"a", "b", "c"}
+-- 	_ = append(s)
+-- 
+-- Such calls are always no-ops and often indicate an
+-- underlying mistake.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field appends boolean
+-- report mismatches between assembly files and Go declarations
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field asmdecl boolean
+-- check for useless assignments
+-- 
+-- This checker reports assignments of the form x = x or a[i] = a[i].
+-- These are almost always useless, and even when they aren't they are
+-- usually a mistake.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field assign boolean
+-- check for common mistakes using the sync/atomic package
+-- 
+-- The atomic checker looks for assignment statements of the form:
+-- 
+-- 	x = atomic.AddUint64(&x, 1)
+-- 
+-- which are not atomic.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field atomic boolean
+-- check for non-64-bits-aligned arguments to sync/atomic functions
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field atomicalign boolean
+-- check for common mistakes involving boolean operators
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field bools boolean
+-- check //go:build and // +build directives
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field buildtag boolean
+-- detect some violations of the cgo pointer passing rules
+-- 
+-- Check for invalid cgo pointer passing.
+-- This looks for code that uses cgo to call C code passing values
+-- whose types are almost always invalid according to the cgo pointer
+-- sharing rules.
+-- Specifically, it warns about attempts to pass a Go chan, map, func,
+-- or slice to C, either directly, or via a pointer, array, or struct.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field cgocall boolean
+-- check for unkeyed composite literals
+-- 
+-- This analyzer reports a diagnostic for composite literals of struct
+-- types imported from another package that do not use the field-keyed
+-- syntax. Such literals are fragile because the addition of a new field
+-- (even if unexported) to the struct will cause compilation to fail.
+-- 
+-- As an example,
+-- 
+-- 	err = &net.DNSConfigError{err}
+-- 
+-- should be replaced by:
+-- 
+-- 	err = &net.DNSConfigError{Err: err}
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field composites boolean
+-- check for locks erroneously passed by value
+-- 
+-- Inadvertently copying a value containing a lock, such as sync.Mutex or
+-- sync.WaitGroup, may cause both copies to malfunction. Generally such
+-- values should be referred to through a pointer.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field copylocks boolean
+-- check for calls of reflect.DeepEqual on error values
+-- 
+-- The deepequalerrors checker looks for calls of the form:
+-- 
+--     reflect.DeepEqual(err1, err2)
+-- 
+-- where err1 and err2 are errors. Using reflect.DeepEqual to compare
+-- errors is discouraged.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field deepequalerrors boolean
+-- report common mistakes in defer statements
+-- 
+-- The defers analyzer reports a diagnostic when a defer statement would
+-- result in a non-deferred call to time.Since, as experience has shown
+-- that this is nearly always a mistake.
+-- 
+-- For example:
+-- 
+-- 	start := time.Now()
+-- 	...
+-- 	defer recordLatency(time.Since(start)) // error: call to time.Since is not deferred
+-- 
+-- The correct code is:
+-- 
+-- 	defer func() { recordLatency(time.Since(start)) }()
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field defers boolean
+-- check for use of deprecated identifiers
+-- 
+-- The deprecated analyzer looks for deprecated symbols and package
+-- imports.
+-- 
+-- See https://go.dev/wiki/Deprecated to learn about Go's convention
+-- for documenting and signaling deprecated identifiers.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field deprecated boolean
+-- check Go toolchain directives such as //go:debug
+-- 
+-- This analyzer checks for problems with known Go toolchain directives
+-- in all Go source files in a package directory, even those excluded by
+-- //go:build constraints, and all non-Go source files too.
+-- 
+-- For //go:debug (see https://go.dev/doc/godebug), the analyzer checks
+-- that the directives are placed only in Go source files, only above the
+-- package comment, and only in package main or *_test.go files.
+-- 
+-- Support for other known directives may be added in the future.
+-- 
+-- This analyzer does not check //go:build, which is handled by the
+-- buildtag analyzer.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field directive boolean
+-- check //go:embed directive usage
+-- 
+-- This analyzer checks that the embed package is imported if //go:embed
+-- directives are present, providing a suggested fix to add the import if
+-- it is missing.
+-- 
+-- This analyzer also checks that //go:embed directives precede the
+-- declaration of a single variable.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field embed boolean
+-- report passing non-pointer or non-error values to errors.As
+-- 
+-- The errorsas analysis reports calls to errors.As where the type
+-- of the second argument is not a pointer to a type implementing error.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field errorsas boolean
+-- find structs that would use less memory if their fields were sorted
+-- 
+-- This analyzer find structs that can be rearranged to use less memory, and provides
+-- a suggested edit with the most compact order.
+-- 
+-- Note that there are two different diagnostics reported. One checks struct size,
+-- and the other reports "pointer bytes" used. Pointer bytes is how many bytes of the
+-- object that the garbage collector has to potentially scan for pointers, for example:
+-- 
+-- 	struct { uint32; string }
+-- 
+-- have 16 pointer bytes because the garbage collector has to scan up through the string's
+-- inner pointer.
+-- 
+-- 	struct { string; *uint32 }
+-- 
+-- has 24 pointer bytes because it has to scan further through the *uint32.
+-- 
+-- 	struct { string; uint32 }
+-- 
+-- has 8 because it can stop immediately after the string pointer.
+-- 
+-- Be aware that the most compact order is not always the most efficient.
+-- In rare cases it may cause two variables each updated by its own goroutine
+-- to occupy the same CPU cache line, inducing a form of memory contention
+-- known as "false sharing" that slows down both goroutines.
+-- 
+---@field fieldalignment boolean
+-- suggest fixes for errors due to an incorrect number of return values
+-- 
+-- This checker provides suggested fixes for type errors of the
+-- type "wrong number of return values (want %d, got %d)". For example:
+-- 
+-- 	func m() (int, string, *bool, error) {
+-- 		return
+-- 	}
+-- 
+-- will turn into
+-- 
+-- 	func m() (int, string, *bool, error) {
+-- 		return 0, "", nil, nil
+-- 	}
+-- 
+-- This functionality is similar to https://github.com/sqs/goreturns.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field fillreturns boolean
+-- report assembly that clobbers the frame pointer before saving it
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field framepointer boolean
+-- check for mistakes using HTTP responses
+-- 
+-- A common mistake when using the net/http package is to defer a function
+-- call to close the http.Response Body before checking the error that
+-- determines whether the response is valid:
+-- 
+-- 	resp, err := http.Head(url)
+-- 	defer resp.Body.Close()
+-- 	if err != nil {
+-- 		log.Fatal(err)
+-- 	}
+-- 	// (defer statement belongs here)
+-- 
+-- This checker helps uncover latent nil dereference bugs by reporting a
+-- diagnostic for such mistakes.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field httpresponse boolean
+-- detect impossible interface-to-interface type assertions
+-- 
+-- This checker flags type assertions v.(T) and corresponding type-switch cases
+-- in which the static type V of v is an interface that cannot possibly implement
+-- the target interface T. This occurs when V and T contain methods with the same
+-- name but different signatures. Example:
+-- 
+-- 	var v interface {
+-- 		Read()
+-- 	}
+-- 	_ = v.(io.Reader)
+-- 
+-- The Read method in v has a different signature than the Read method in
+-- io.Reader, so this assertion cannot succeed.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field ifaceassert boolean
+-- check for unnecessary type arguments in call expressions
+-- 
+-- Explicit type arguments may be omitted from call expressions if they can be
+-- inferred from function arguments, or from other type arguments:
+-- 
+-- 	func f[T any](T) {}
+-- 	
+-- 	func _() {
+-- 		f[string]("foo") // string could be inferred
+-- 	}
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field infertypeargs boolean
+-- check references to loop variables from within nested functions
+-- 
+-- This analyzer reports places where a function literal references the
+-- iteration variable of an enclosing loop, and the loop calls the function
+-- in such a way (e.g. with go or defer) that it may outlive the loop
+-- iteration and possibly observe the wrong value of the variable.
+-- 
+-- Note: An iteration variable can only outlive a loop iteration in Go versions <=1.21.
+-- In Go 1.22 and later, the loop variable lifetimes changed to create a new
+-- iteration variable per loop iteration. (See go.dev/issue/60078.)
+-- 
+-- In this example, all the deferred functions run after the loop has
+-- completed, so all observe the final value of v [<go1.22].
+-- 
+-- 	for _, v := range list {
+-- 	    defer func() {
+-- 	        use(v) // incorrect
+-- 	    }()
+-- 	}
+-- 
+-- One fix is to create a new variable for each iteration of the loop:
+-- 
+-- 	for _, v := range list {
+-- 	    v := v // new var per iteration
+-- 	    defer func() {
+-- 	        use(v) // ok
+-- 	    }()
+-- 	}
+-- 
+-- After Go version 1.22, the previous two for loops are equivalent
+-- and both are correct.
+-- 
+-- The next example uses a go statement and has a similar problem [<go1.22].
+-- In addition, it has a data race because the loop updates v
+-- concurrent with the goroutines accessing it.
+-- 
+-- 	for _, v := range elem {
+-- 	    go func() {
+-- 	        use(v)  // incorrect, and a data race
+-- 	    }()
+-- 	}
+-- 
+-- A fix is the same as before. The checker also reports problems
+-- in goroutines started by golang.org/x/sync/errgroup.Group.
+-- A hard-to-spot variant of this form is common in parallel tests:
+-- 
+-- 	func Test(t *testing.T) {
+-- 	    for _, test := range tests {
+-- 	        t.Run(test.name, func(t *testing.T) {
+-- 	            t.Parallel()
+-- 	            use(test) // incorrect, and a data race
+-- 	        })
+-- 	    }
+-- 	}
+-- 
+-- The t.Parallel() call causes the rest of the function to execute
+-- concurrent with the loop [<go1.22].
+-- 
+-- The analyzer reports references only in the last statement,
+-- as it is not deep enough to understand the effects of subsequent
+-- statements that might render the reference benign.
+-- ("Last statement" is defined recursively in compound
+-- statements such as if, switch, and select.)
+-- 
+-- See: https://golang.org/doc/go_faq.html#closures_and_goroutines
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field loopclosure boolean
+-- check cancel func returned by context.WithCancel is called
+-- 
+-- The cancellation function returned by context.WithCancel, WithTimeout,
+-- and WithDeadline must be called or the new context will remain live
+-- until its parent context is cancelled.
+-- (The background context is never cancelled.)
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field lostcancel boolean
+-- check for useless comparisons between functions and nil
+-- 
+-- A useless comparison is one like f == nil as opposed to f() == nil.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field nilfunc boolean
+-- check for redundant or impossible nil comparisons
+-- 
+-- The nilness checker inspects the control-flow graph of each function in
+-- a package and reports nil pointer dereferences, degenerate nil
+-- pointers, and panics with nil values. A degenerate comparison is of the form
+-- x==nil or x!=nil where x is statically known to be nil or non-nil. These are
+-- often a mistake, especially in control flow related to errors. Panics with nil
+-- values are checked because they are not detectable by
+-- 
+-- 	if r := recover(); r != nil {
+-- 
+-- This check reports conditions such as:
+-- 
+-- 	if f == nil { // impossible condition (f is a function)
+-- 	}
+-- 
+-- and:
+-- 
+-- 	p := &v
+-- 	...
+-- 	if p != nil { // tautological condition
+-- 	}
+-- 
+-- and:
+-- 
+-- 	if p == nil {
+-- 		print(*p) // nil dereference
+-- 	}
+-- 
+-- and:
+-- 
+-- 	if p == nil {
+-- 		panic(p)
+-- 	}
+-- 
+-- Sometimes the control flow may be quite complex, making bugs hard
+-- to spot. In the example below, the err.Error expression is
+-- guaranteed to panic because, after the first return, err must be
+-- nil. The intervening loop is just a distraction.
+-- 
+-- 	...
+-- 	err := g.Wait()
+-- 	if err != nil {
+-- 		return err
+-- 	}
+-- 	partialSuccess := false
+-- 	for _, err := range errs {
+-- 		if err == nil {
+-- 			partialSuccess = true
+-- 			break
+-- 		}
+-- 	}
+-- 	if partialSuccess {
+-- 		reportStatus(StatusMessage{
+-- 			Code:   code.ERROR,
+-- 			Detail: err.Error(), // "nil dereference in dynamic method call"
+-- 		})
+-- 		return nil
+-- 	}
+-- 
+-- ...
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field nilness boolean
+-- suggested fixes for "no new vars on left side of :="
+-- 
+-- This checker provides suggested fixes for type errors of the
+-- type "no new vars on left side of :=". For example:
+-- 
+-- 	z := 1
+-- 	z := 2
+-- 
+-- will turn into
+-- 
+-- 	z := 1
+-- 	z = 2
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field nonewvars boolean
+-- suggested fixes for unexpected return values
+-- 
+-- This checker provides suggested fixes for type errors of the
+-- type "no result values expected" or "too many return values".
+-- For example:
+-- 
+-- 	func z() { return nil }
+-- 
+-- will turn into
+-- 
+-- 	func z() { return }
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field noresultvalues boolean
+-- check consistency of Printf format strings and arguments
+-- 
+-- The check applies to calls of the formatting functions such as
+-- [fmt.Printf] and [fmt.Sprintf], as well as any detected wrappers of
+-- those functions such as [log.Printf]. It reports a variety of
+-- mistakes such as syntax errors in the format string and mismatches
+-- (of number and type) between the verbs and their arguments.
+-- 
+-- See the documentation of the fmt package for the complete set of
+-- format operators and their operand types.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field printf boolean
+-- check for possible unintended shadowing of variables
+-- 
+-- This analyzer check for shadowed variables.
+-- A shadowed variable is a variable declared in an inner scope
+-- with the same name and type as a variable in an outer scope,
+-- and where the outer variable is mentioned after the inner one
+-- is declared.
+-- 
+-- (This definition can be refined; the module generates too many
+-- false positives and is not yet enabled by default.)
+-- 
+-- For example:
+-- 
+-- 	func BadRead(f *os.File, buf []byte) error {
+-- 		var err error
+-- 		for {
+-- 			n, err := f.Read(buf) // shadows the function variable 'err'
+-- 			if err != nil {
+-- 				break // causes return of wrong value
+-- 			}
+-- 			foo(buf)
+-- 		}
+-- 		return err
+-- 	}
+---@field shadow boolean
+-- check for shifts that equal or exceed the width of the integer
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field shift boolean
+-- check for unbuffered channel of os.Signal
+-- 
+-- This checker reports call expression of the form
+-- 
+-- 	signal.Notify(c <-chan os.Signal, sig ...os.Signal),
+-- 
+-- where c is an unbuffered channel, which can be at risk of missing the signal.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field sigchanyzer boolean
+-- check for composite literal simplifications
+-- 
+-- An array, slice, or map composite literal of the form:
+-- 
+-- 	[]T{T{}, T{}}
+-- 
+-- will be simplified to:
+-- 
+-- 	[]T{{}, {}}
+-- 
+-- This is one of the simplifications that "gofmt -s" applies.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field simplifycompositelit boolean
+-- check for range statement simplifications
+-- 
+-- A range of the form:
+-- 
+-- 	for x, _ = range v {...}
+-- 
+-- will be simplified to:
+-- 
+-- 	for x = range v {...}
+-- 
+-- A range of the form:
+-- 
+-- 	for _ = range v {...}
+-- 
+-- will be simplified to:
+-- 
+-- 	for range v {...}
+-- 
+-- This is one of the simplifications that "gofmt -s" applies.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field simplifyrange boolean
+-- check for slice simplifications
+-- 
+-- A slice expression of the form:
+-- 
+-- 	s[a:len(s)]
+-- 
+-- will be simplified to:
+-- 
+-- 	s[a:]
+-- 
+-- This is one of the simplifications that "gofmt -s" applies.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field simplifyslice boolean
+-- check for invalid structured logging calls
+-- 
+-- The slog checker looks for calls to functions from the log/slog
+-- package that take alternating key-value pairs. It reports calls
+-- where an argument in a key position is neither a string nor a
+-- slog.Attr, and where a final key is missing its value.
+-- For example,it would report
+-- 
+-- 	slog.Warn("message", 11, "k") // slog.Warn arg "11" should be a string or a slog.Attr
+-- 
+-- and
+-- 
+-- 	slog.Info("message", "k1", v1, "k2") // call to slog.Info missing a final value
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field slog boolean
+-- check the argument type of sort.Slice
+-- 
+-- sort.Slice requires an argument of a slice type. Check that
+-- the interface{} value passed to sort.Slice is actually a slice.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field sortslice boolean
+-- check signature of methods of well-known interfaces
+-- 
+-- Sometimes a type may be intended to satisfy an interface but may fail to
+-- do so because of a mistake in its method signature.
+-- For example, the result of this WriteTo method should be (int64, error),
+-- not error, to satisfy io.WriterTo:
+-- 
+-- 	type myWriterTo struct{...}
+-- 	func (myWriterTo) WriteTo(w io.Writer) error { ... }
+-- 
+-- This check ensures that each method whose name matches one of several
+-- well-known interface methods from the standard library has the correct
+-- signature for that interface.
+-- 
+-- Checked method names include:
+-- 
+-- 	Format GobEncode GobDecode MarshalJSON MarshalXML
+-- 	Peek ReadByte ReadFrom ReadRune Scan Seek
+-- 	UnmarshalJSON UnreadByte UnreadRune WriteByte
+-- 	WriteTo
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field stdmethods boolean
+-- report uses of too-new standard library symbols
+-- 
+-- The stdversion analyzer reports references to symbols in the standard
+-- library that were introduced by a Go release higher than the one in
+-- force in the referring file. (Recall that the file's Go version is
+-- defined by the 'go' directive its module's go.mod file, or by a
+-- "//go:build go1.X" build tag at the top of the file.)
+-- 
+-- The analyzer does not report a diagnostic for a reference to a "too
+-- new" field or method of a type that is itself "too new", as this may
+-- have false positives, for example if fields or methods are accessed
+-- through a type alias that is guarded by a Go version constraint.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field stdversion boolean
+-- check for string(int) conversions
+-- 
+-- This checker flags conversions of the form string(x) where x is an integer
+-- (but not byte or rune) type. Such conversions are discouraged because they
+-- return the UTF-8 representation of the Unicode code point x, and not a decimal
+-- string representation of x as one might expect. Furthermore, if x denotes an
+-- invalid code point, the conversion cannot be statically rejected.
+-- 
+-- For conversions that intend on using the code point, consider replacing them
+-- with string(rune(x)). Otherwise, strconv.Itoa and its equivalents return the
+-- string representation of the value in the desired base.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field stringintconv boolean
+-- check that struct field tags conform to reflect.StructTag.Get
+-- 
+-- Also report certain struct tags (json, xml) used with unexported fields.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field structtag boolean
+-- detect missing methods and fix with stub implementations
+-- 
+-- This analyzer detects type-checking errors due to missing methods
+-- in assignments from concrete types to interface types, and offers
+-- a suggested fix that will create a set of stub methods so that
+-- the concrete type satisfies the interface.
+-- 
+-- For example, this function will not compile because the value
+-- NegativeErr{} does not implement the "error" interface:
+-- 
+-- 	func sqrt(x float64) (float64, error) {
+-- 		if x < 0 {
+-- 			return 0, NegativeErr{} // error: missing method
+-- 		}
+-- 		...
+-- 	}
+-- 
+-- 	type NegativeErr struct{}
+-- 
+-- This analyzer will suggest a fix to declare this method:
+-- 
+-- 	// Error implements error.Error.
+-- 	func (NegativeErr) Error() string {
+-- 		panic("unimplemented")
+-- 	}
+-- 
+-- (At least, it appears to behave that way, but technically it
+-- doesn't use the SuggestedFix mechanism and the stub is created by
+-- logic in gopls's golang.stub function.)
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field stubmethods boolean
+-- report calls to (*testing.T).Fatal from goroutines started by a test
+-- 
+-- Functions that abruptly terminate a test, such as the Fatal, Fatalf, FailNow, and
+-- Skip{,f,Now} methods of *testing.T, must be called from the test goroutine itself.
+-- This checker detects calls to these functions that occur within a goroutine
+-- started by the test. For example:
+-- 
+-- 	func TestFoo(t *testing.T) {
+-- 	    go func() {
+-- 	        t.Fatal("oops") // error: (*T).Fatal called from non-test goroutine
+-- 	    }()
+-- 	}
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field testinggoroutine boolean
+-- check for common mistaken usages of tests and examples
+-- 
+-- The tests checker walks Test, Benchmark, Fuzzing and Example functions checking
+-- malformed names, wrong signatures and examples documenting non-existent
+-- identifiers.
+-- 
+-- Please see the documentation for package testing in golang.org/pkg/testing
+-- for the conventions that are enforced for Tests, Benchmarks, and Examples.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field tests boolean
+-- check for calls of (time.Time).Format or time.Parse with 2006-02-01
+-- 
+-- The timeformat checker looks for time formats with the 2006-02-01 (yyyy-dd-mm)
+-- format. Internationally, "yyyy-dd-mm" does not occur in common calendar date
+-- standards, and so it is more likely that 2006-01-02 (yyyy-mm-dd) was intended.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field timeformat boolean
+-- suggested fixes for "undeclared name: <>"
+-- 
+-- This checker provides suggested fixes for type errors of the
+-- type "undeclared name: <>". It will either insert a new statement,
+-- such as:
+-- 
+-- 	<> :=
+-- 
+-- or a new function declaration, such as:
+-- 
+-- 	func <>(inferred parameters) {
+-- 		panic("implement me!")
+-- 	}
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field undeclaredname boolean
+-- report passing non-pointer or non-interface values to unmarshal
+-- 
+-- The unmarshal analysis reports calls to functions such as json.Unmarshal
+-- in which the argument type is not a pointer or an interface.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field unmarshal boolean
+-- check for unreachable code
+-- 
+-- The unreachable analyzer finds statements that execution can never reach
+-- because they are preceded by an return statement, a call to panic, an
+-- infinite loop, or similar constructs.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field unreachable boolean
+-- check for invalid conversions of uintptr to unsafe.Pointer
+-- 
+-- The unsafeptr analyzer reports likely incorrect uses of unsafe.Pointer
+-- to convert integers to pointers. A conversion from uintptr to
+-- unsafe.Pointer is invalid if it implies that there is a uintptr-typed
+-- word in memory that holds a pointer value, because that word will be
+-- invisible to stack copying and to the garbage collector.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field unsafeptr boolean
+-- check for unused parameters of functions
+-- 
+-- The unusedparams analyzer checks functions to see if there are
+-- any parameters that are not being used.
+-- 
+-- To ensure soundness, it ignores:
+--   - "address-taken" functions, that is, functions that are used as
+--     a value rather than being called directly; their signatures may
+--     be required to conform to a func type.
+--   - exported functions or methods, since they may be address-taken
+--     in another package.
+--   - unexported methods whose name matches an interface method
+--     declared in the same package, since the method's signature
+--     may be required to conform to the interface type.
+--   - functions with empty bodies, or containing just a call to panic.
+--   - parameters that are unnamed, or named "_", the blank identifier.
+-- 
+-- The analyzer suggests a fix of replacing the parameter name by "_",
+-- but in such cases a deeper fix can be obtained by invoking the
+-- "Refactor: remove unused parameter" code action, which will
+-- eliminate the parameter entirely, along with all corresponding
+-- arguments at call sites, while taking care to preserve any side
+-- effects in the argument expressions; see
+-- https://github.com/golang/tools/releases/tag/gopls%2Fv0.14.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field unusedparams boolean
+-- check for unused results of calls to some functions
+-- 
+-- Some functions like fmt.Errorf return a result and have no side
+-- effects, so it is always a mistake to discard the result. Other
+-- functions may return an error that must not be ignored, or a cleanup
+-- operation that must be called. This analyzer reports calls to
+-- functions like these when the result of the call is ignored.
+-- 
+-- The set of functions may be controlled using flags.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field unusedresult boolean
+-- check for unused variables and suggest fixes
+---@field unusedvariable boolean
+-- checks for unused writes
+-- 
+-- The analyzer reports instances of writes to struct fields and
+-- arrays that are never read. Specifically, when a struct object
+-- or an array is copied, its elements are copied implicitly by
+-- the compiler, and any element write to this copy does nothing
+-- with the original object.
+-- 
+-- For example:
+-- 
+-- 	type T struct { x int }
+-- 
+-- 	func f(input []T) {
+-- 		for i, v := range input {  // v is a copy
+-- 			v.x = i  // unused write to field x
+-- 		}
+-- 	}
+-- 
+-- Another example is about non-pointer receiver:
+-- 
+-- 	type T struct { x int }
+-- 
+-- 	func (t T) f() {  // t is a copy
+-- 		t.x = i  // unused write to field x
+-- 	}
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field unusedwrite boolean
+-- check for constraints that could be simplified to "any"
+---@field useany boolean
+
+-- (Experimental) annotations specifies the various kinds of optimization diagnostics
+-- that should be reported by the gc_details command.
+-- 
+---@class _.lspconfig.settings.gopls.Ui.diagnostic.annotations
+-- `"bounds"` controls bounds checking diagnostics.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field bounds boolean
+-- `"escape"` controls diagnostics about escape choices.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field escape boolean
+-- `"inline"` controls diagnostics about inlining choices.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field inline boolean
+-- `"nil"` controls nil checks.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field nil boolean
+
+-- Configure the default Go language server ('gopls'). In most cases, configuring this section is unnecessary. See [the documentation](https://github.com/golang/tools/blob/master/gopls/doc/settings.md) for all available settings.
+---@class _.lspconfig.settings.gopls.Gopls
+-- (Experimental) allowImplicitNetworkAccess disables GOPROXY=off, allowing implicit module
+-- downloads rather than requiring user action. This option will eventually
+-- be removed.
+-- 
+---@field build.allowImplicitNetworkAccess boolean
+-- buildFlags is the set of flags passed on to the build system when invoked.
+-- It is applied to queries like `go list`, which is used when discovering files.
+-- The most common use is to set `-tags`.
+-- 
+-- If unspecified, values of `go.buildFlags, go.buildTags` will be propagated.
+-- 
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field build.buildFlags any[]
+-- directoryFilters can be used to exclude unwanted directories from the
+-- workspace. By default, all directories are included. Filters are an
+-- operator, `+` to include and `-` to exclude, followed by a path prefix
+-- relative to the workspace folder. They are evaluated in order, and
+-- the last filter that applies to a path controls whether it is included.
+-- The path prefix can be empty, so an initial `-` excludes everything.
+-- 
+-- DirectoryFilters also supports the `**` operator to match 0 or more directories.
+-- 
+-- Examples:
+-- 
+-- Exclude node_modules at current depth: `-node_modules`
+-- 
+-- Exclude node_modules at any depth: `-**/node_modules`
+-- 
+-- Include only project_a: `-` (exclude everything), `+project_a`
+-- 
+-- Include only project_a, but not node_modules inside it: `-`, `+project_a`, `-project_a/node_modules`
+-- 
+-- 
+-- ```lua
+-- default = { "-**/node_modules" }
+-- ```
+---@field build.directoryFilters any[]
+-- env adds environment variables to external commands run by `gopls`, most notably `go list`.
+-- 
+---@field build.env table
+-- (Experimental) expandWorkspaceToModule determines which packages are considered
+-- "workspace packages" when the workspace is using modules.
+-- 
+-- Workspace packages affect the scope of workspace-wide operations. Notably,
+-- gopls diagnoses all packages considered to be part of the workspace after
+-- every keystroke, so by setting "ExpandWorkspaceToModule" to false, and
+-- opening a nested workspace directory, you can reduce the amount of work
+-- gopls has to do to keep your workspace up to date.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field build.expandWorkspaceToModule boolean
+-- (Experimental) obsolete, no effect
+-- 
+-- 
+-- ```lua
+-- default = ""
+-- ```
+---@field build.memoryMode string
+-- standaloneTags specifies a set of build constraints that identify
+-- individual Go source files that make up the entire main package of an
+-- executable.
+-- 
+-- A common example of standalone main files is the convention of using the
+-- directive `//go:build ignore` to denote files that are not intended to be
+-- included in any package, for example because they are invoked directly by
+-- the developer using `go run`.
+-- 
+-- Gopls considers a file to be a standalone main file if and only if it has
+-- package name "main" and has a build directive of the exact form
+-- "//go:build tag" or "// +build tag", where tag is among the list of tags
+-- configured by this setting. Notably, if the build constraint is more
+-- complicated than a simple tag (such as the composite constraint
+-- `//go:build tag && go1.18`), the file is not considered to be a standalone
+-- main file.
+-- 
+-- This setting is only supported when gopls is built with Go 1.16 or later.
+-- 
+-- 
+-- ```lua
+-- default = { "ignore" }
+-- ```
+---@field build.standaloneTags any[]
+-- templateExtensions gives the extensions of file names that are treateed
+-- as template files. (The extension
+-- is the part of the file name after the final dot.)
+-- 
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field build.templateExtensions any[]
+-- gofumpt indicates if we should run gofumpt formatting.
+-- 
+---@field formatting.gofumpt boolean
+-- local is the equivalent of the `goimports -local` flag, which puts
+-- imports beginning with this string after third-party packages. It should
+-- be the prefix of the import path whose imports should be grouped
+-- separately.
+-- 
+-- 
+-- ```lua
+-- default = ""
+-- ```
+---@field formatting.local string
+-- codelenses overrides the enabled/disabled state of each of gopls'
+-- sources of [Code Lenses](codelenses.md).
+-- 
+-- Example Usage:
+-- 
+-- ```json5
+-- "gopls": {
+-- ...
+--   "codelenses": {
+--     "generate": false,  // Don't show the `go generate` lens.
+--     "gc_details": true  // Show a code lens toggling the display of gc's choices.
+--   }
+-- ...
+-- }
+-- ```
+-- 
+---@field ui.codelenses _.lspconfig.settings.gopls.Ui.codelenses
+-- completeFunctionCalls enables function call completion.
+-- 
+-- When completing a statement, or when a function return type matches the
+-- expected of the expression being completed, completion may suggest call
+-- expressions (i.e. may include parentheses).
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field ui.completion.completeFunctionCalls boolean
+-- (For Debugging) completionBudget is the soft latency goal for completion requests. Most
+-- requests finish in a couple milliseconds, but in some cases deep
+-- completions can take much longer. As we use up our budget we
+-- dynamically reduce the search scope to ensure we return timely
+-- results. Zero means unlimited.
+-- 
+-- 
+-- ```lua
+-- default = "100ms"
+-- ```
+---@field ui.completion.completionBudget string
+-- (Experimental) experimentalPostfixCompletions enables artificial method snippets
+-- such as "someSlice.sort!".
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field ui.completion.experimentalPostfixCompletions boolean
+-- (Advanced) matcher sets the algorithm that is used when calculating completion
+-- candidates.
+-- 
+-- 
+-- ```lua
+-- default = "Fuzzy"
+-- ```
+---@field ui.completion.matcher "CaseInsensitive" | "CaseSensitive" | "Fuzzy"
+-- placeholders enables placeholders for function parameters or struct
+-- fields in completion responses.
+-- 
+---@field ui.completion.usePlaceholders boolean
+-- analyses specify analyses that the user would like to enable or disable.
+-- A map of the names of analysis passes that should be enabled/disabled.
+-- A full list of analyzers that gopls uses can be found in
+-- [analyzers.md](https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md).
+-- 
+-- Example Usage:
+-- 
+-- ```json5
+-- ...
+-- "analyses": {
+--   "unreachable": false, // Disable the unreachable analyzer.
+--   "unusedvariable": true  // Enable the unusedvariable analyzer.
+-- }
+-- ...
+-- ```
+-- 
+---@field ui.diagnostic.analyses _.lspconfig.settings.gopls.Ui.diagnostic.analyses
+-- analysisProgressReporting controls whether gopls sends progress
+-- notifications when construction of its index of analysis facts is taking a
+-- long time. Cancelling these notifications will cancel the indexing task,
+-- though it will restart after the next change in the workspace.
+-- 
+-- When a package is opened for the first time and heavyweight analyses such as
+-- staticcheck are enabled, it can take a while to construct the index of
+-- analysis facts for all its dependencies. The index is cached in the
+-- filesystem, so subsequent analysis should be faster.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field ui.diagnostic.analysisProgressReporting boolean
+-- (Experimental) annotations specifies the various kinds of optimization diagnostics
+-- that should be reported by the gc_details command.
+-- 
+---@field ui.diagnostic.annotations _.lspconfig.settings.gopls.Ui.diagnostic.annotations
+-- (Advanced) diagnosticsDelay controls the amount of time that gopls waits
+-- after the most recent file modification before computing deep diagnostics.
+-- Simple diagnostics (parsing and type-checking) are always run immediately
+-- on recently modified packages.
+-- 
+-- This option must be set to a valid duration string, for example `"250ms"`.
+-- 
+-- 
+-- ```lua
+-- default = "1s"
+-- ```
+---@field ui.diagnostic.diagnosticsDelay string
+-- (Experimental) diagnosticsTrigger controls when to run diagnostics.
+-- 
+-- 
+-- ```lua
+-- default = "Edit"
+-- ```
+---@field ui.diagnostic.diagnosticsTrigger "Edit" | "Save"
+-- (Experimental) staticcheck enables additional analyses from staticcheck.io.
+-- These analyses are documented on
+-- [Staticcheck's website](https://staticcheck.io/docs/checks/).
+-- 
+---@field ui.diagnostic.staticcheck boolean
+-- hoverKind controls the information that appears in the hover text.
+-- SingleLine and Structured are intended for use only by authors of editor plugins.
+-- 
+-- 
+-- ```lua
+-- default = "FullDocumentation"
+-- ```
+---@field ui.documentation.hoverKind "FullDocumentation" | "NoDocumentation" | "SingleLine" | "Structured" | "SynopsisDocumentation"
+-- linkTarget controls where documentation links go.
+-- It might be one of:
+-- 
+-- * `"godoc.org"`
+-- * `"pkg.go.dev"`
+-- 
+-- If company chooses to use its own `godoc.org`, its address can be used as well.
+-- 
+-- Modules matching the GOPRIVATE environment variable will not have
+-- documentation links in hover.
+-- 
+-- 
+-- ```lua
+-- default = "pkg.go.dev"
+-- ```
+---@field ui.documentation.linkTarget string
+-- linksInHover controls the presence of documentation links
+-- in hover markdown.
+-- 
+-- Its legal values are:
+-- - `false`, for no links;
+-- - `true`, for links to the `linkTarget` domain; or
+-- - `"gopls"`, for links to gopls' internal documentation viewer.
+-- 
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field ui.documentation.linksInHover boolean
+-- importShortcut specifies whether import statements should link to
+-- documentation or go to definitions.
+-- 
+-- 
+-- ```lua
+-- default = "Both"
+-- ```
+---@field ui.navigation.importShortcut "Both" | "Definition" | "Link"
+-- (Advanced) symbolMatcher sets the algorithm that is used when finding workspace symbols.
+-- 
+-- 
+-- ```lua
+-- default = "FastFuzzy"
+-- ```
+---@field ui.navigation.symbolMatcher "CaseInsensitive" | "CaseSensitive" | "FastFuzzy" | "Fuzzy"
+-- symbolScope controls which packages are searched for workspace/symbol
+-- requests. When the scope is "workspace", gopls searches only workspace
+-- packages. When the scope is "all", gopls searches all loaded packages,
+-- including dependencies and the standard library.
+-- 
+-- 
+-- ```lua
+-- default = "all"
+-- ```
+---@field ui.navigation.symbolScope "all" | "workspace"
+-- (Advanced) symbolStyle controls how symbols are qualified in symbol responses.
+-- 
+-- Example Usage:
+-- 
+-- ```json5
+-- "gopls": {
+-- ...
+--   "symbolStyle": "Dynamic",
+-- ...
+-- }
+-- ```
+-- 
+-- 
+-- ```lua
+-- default = "Dynamic"
+-- ```
+---@field ui.navigation.symbolStyle "Dynamic" | "Full" | "Package"
+-- (Experimental) noSemanticNumber  turns off the sending of the semantic token 'number'
+-- 
+---@field ui.noSemanticNumber boolean
+-- (Experimental) noSemanticString turns off the sending of the semantic token 'string'
+-- 
+---@field ui.noSemanticString boolean
+-- (Experimental) semanticTokens controls whether the LSP server will send
+-- semantic tokens to the client.
+-- 
+---@field ui.semanticTokens boolean
+-- (For Debugging) verboseOutput enables additional debug logging.
+-- 
+---@field verboseOutput boolean
+
+---@class lspconfig.settings.gopls
+---@field go _.lspconfig.settings.gopls.Go
+-- Configure the default Go language server ('gopls'). In most cases, configuring this section is unnecessary. See [the documentation](https://github.com/golang/tools/blob/master/gopls/doc/settings.md) for all available settings.
+---@field gopls _.lspconfig.settings.gopls.Gopls
 
 ---@class _.lspconfig.settings.grammarly.SuggestionCategories
 -- Flags use of conjunctions such as "but" and "and" at the beginning of sentences.
@@ -8685,6 +11485,31 @@
 ---@field luau _.lspconfig.settings.luau_lsp.Luau
 ---@field luau-lsp _.lspconfig.settings.luau_lsp.Luau-lsp
 
+---@class _.lspconfig.settings.nil_ls.Nix
+-- Use LSP instead of nix-instantiate and nixpkgs-fmt.
+---@field enableLanguageServer boolean
+-- Location of the nix formatter command.
+-- 
+-- ```lua
+-- default = "nixpkgs-fmt"
+-- ```
+---@field formatterPath string|any[]
+-- Location of the nix language server command.
+-- 
+-- ```lua
+-- default = "nil"
+-- ```
+---@field serverPath string
+-- Settings passed to the language server on configuration requests.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field serverSettings table
+
+---@class lspconfig.settings.nil_ls
+---@field nix _.lspconfig.settings.nil_ls.Nix
+
 ---@class _.lspconfig.settings.omnisharp.ExpressionEvaluationOptions
 -- %generateOptionsSchema.expressionEvaluationOptions.allowFastEvaluate.description%
 -- 
@@ -10162,6 +12987,135 @@
 
 ---@class lspconfig.settings.powershell_es
 ---@field powershell _.lspconfig.settings.powershell_es.Powershell
+
+---@class _.lspconfig.settings.prettier.Prettier
+-- %ext.config.arrowParens%
+-- 
+-- ```lua
+-- default = "always"
+-- ```
+---@field arrowParens "avoid" | "always"
+-- %ext.config.bracketSameLine%
+---@field bracketSameLine boolean
+-- %ext.config.bracketSpacing%
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field bracketSpacing boolean
+-- %ext.config.configPath%
+---@field configPath string
+-- %ext.config.disableLanguages%
+---@field disableLanguages string[]
+-- %ext.config.documentSelectors%
+---@field documentSelectors string[]
+-- %ext.config.embeddedLanguageFormatting%
+-- 
+-- ```lua
+-- default = "auto"
+-- ```
+---@field embeddedLanguageFormatting "auto" | "off"
+-- %ext.config.enable%
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field enable boolean
+-- %ext.config.enableDebugLogs%
+---@field enableDebugLogs boolean
+-- %ext.config.endOfLine%
+-- 
+-- ```lua
+-- default = "lf"
+-- ```
+---@field endOfLine "auto" | "lf" | "crlf" | "cr"
+-- %ext.config.htmlWhitespaceSensitivity%
+-- 
+-- ```lua
+-- default = "css"
+-- ```
+---@field htmlWhitespaceSensitivity "css" | "strict" | "ignore"
+-- %ext.config.ignorePath%
+-- 
+-- ```lua
+-- default = ".prettierignore"
+-- ```
+---@field ignorePath string
+-- %ext.config.insertPragma%
+---@field insertPragma boolean
+-- %ext.config.jsxBracketSameLine%
+---@field jsxBracketSameLine boolean
+-- %ext.config.jsxSingleQuote%
+---@field jsxSingleQuote boolean
+-- %ext.config.packageManager%
+-- 
+-- ```lua
+-- default = "npm"
+-- ```
+---@field packageManager "npm" | "yarn" | "pnpm"
+-- %ext.config.prettierPath%
+---@field prettierPath string
+-- %ext.config.printWidth%
+-- 
+-- ```lua
+-- default = 80
+-- ```
+---@field printWidth integer
+-- %ext.config.proseWrap%
+-- 
+-- ```lua
+-- default = "preserve"
+-- ```
+---@field proseWrap "preserve" | "always" | "never"
+-- %ext.config.quoteProps%
+-- 
+-- ```lua
+-- default = "as-needed"
+-- ```
+---@field quoteProps "as-needed" | "consistent" | "preserve"
+-- %ext.config.requireConfig%
+---@field requireConfig boolean
+-- %ext.config.requirePragma%
+---@field requirePragma boolean
+-- %ext.config.resolveGlobalModules%
+---@field resolveGlobalModules boolean
+-- %ext.config.semi%
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field semi boolean
+-- %ext.config.singleAttributePerLine%
+---@field singleAttributePerLine boolean
+-- %ext.config.singleQuote%
+---@field singleQuote boolean
+-- %ext.config.tabWidth%
+-- 
+-- ```lua
+-- default = 2
+-- ```
+---@field tabWidth integer
+-- %ext.config.trailingComma%
+-- 
+-- ```lua
+-- default = "es5"
+-- ```
+---@field trailingComma "none" | "es5" | "all"
+-- %ext.config.useEditorConfig%
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field useEditorConfig boolean
+-- %ext.config.useTabs%
+---@field useTabs boolean
+-- %ext.config.vueIndentScriptAndStyle%
+---@field vueIndentScriptAndStyle boolean
+-- %ext.config.withNodeModules%
+---@field withNodeModules boolean
+
+---@class lspconfig.settings.prettier
+---@field prettier _.lspconfig.settings.prettier.Prettier
 
 ---@class _.lspconfig.settings.psalm.Trace
 -- Traces the communication between VSCode and the Psalm language server.
@@ -14620,6 +17574,153 @@
 ---@class lspconfig.settings.tailwindcss
 ---@field tailwindCSS _.lspconfig.settings.tailwindcss.TailwindCSS
 ---@field tailwindcss-intellisense _.lspconfig.settings.tailwindcss.Tailwindcss-intellisense
+
+---@class _.lspconfig.settings.taplo.Completion
+-- The maximum amount of keys in a dotted key to display during completion, 0 effectively disables key completions.
+-- 
+-- ```lua
+-- default = 5
+-- ```
+---@field maxKeys integer
+
+---@class _.lspconfig.settings.taplo.Formatter
+-- Align consecutive comments after entries and items vertically. This applies to comments that are after entries or array items
+---@field alignComments boolean
+-- Align entries vertically. Entries that have table headers, comments, or blank lines between them are not aligned.
+---@field alignEntries boolean
+-- The maximum amount of consecutive blank lines allowed.
+---@field allowedBlankLines number
+-- Automatically collapse arrays if they fit in one line.
+---@field arrayAutoCollapse boolean
+-- Automatically expand arrays to multiple lines.
+---@field arrayAutoExpand boolean
+-- Put trailing commas for multiline arrays.
+---@field arrayTrailingComma boolean
+-- Target maximum column width after which arrays are expanded into new lines.
+---@field columnWidth number
+-- Omit whitespace padding inside single-line arrays.
+---@field compactArrays boolean
+-- Omit whitespace around `=`.
+---@field compactEntries boolean
+-- Omit whitespace padding inside inline tables.
+---@field compactInlineTables boolean
+-- Use CRLF line endings.
+---@field crlf boolean
+-- Indent entries under tables.
+---@field indentEntries boolean
+-- Indentation to use, should be tabs or spaces but technically could be anything.
+---@field indentString string
+-- Indent subtables if they come in order.
+---@field indentTables boolean
+-- Expand values inside in line tables.
+---@field inlineTableExpand boolean
+-- Alphabetically reorder array values that are not separated by blank lines.
+---@field reorderArrays boolean
+-- Alphabetically reorder keys that are not separated by blank lines.
+---@field reorderKeys boolean
+-- Add trailing newline to the source.
+---@field trailingNewline boolean
+
+---@class _.lspconfig.settings.taplo.Cache
+-- The amount of seconds after which cached catalogs and schemas expire and will be attempted to be fetched again.
+-- 
+-- ```lua
+-- default = 600
+-- ```
+---@field diskExpiration integer
+-- The amount of seconds after which schemas will be invalidated from memory. 
+-- **NOTE**: setting too low values will cause performance issues and validation of some schemas will fail.
+-- 
+-- ```lua
+-- default = 60
+-- ```
+---@field memoryExpiration integer
+
+---@class _.lspconfig.settings.taplo.Schema
+-- Additional document and schema associations. 
+-- 
+--  The key must be a regular expression, this pattern is used to associate schemas with absolute document URIs. Overlapping patterns result in undefined behaviour and either matching schema can be used. 
+-- 
+--  The value must be an absolute URI to the JSON schema, for supported values and more information [read here](https://taplo.tamasfe.dev/configuration#visual-studio-code).
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field associations table
+---@field cache _.lspconfig.settings.taplo.Cache
+-- A list of URLs to schema catalogs where schemas and associations can be fetched from
+-- 
+-- ```lua
+-- default = { "https://www.schemastore.org/api/json/catalog.json" }
+-- ```
+---@field catalogs string[]
+-- Enable completion and validation based on JSON schemas.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field enabled boolean
+-- Whether to show clickable links for keys in the editor.
+---@field links boolean
+
+---@class _.lspconfig.settings.taplo.Syntax
+-- Whether to enable semantic tokens for tables and arrays.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field semanticTokens boolean
+
+---@class _.lspconfig.settings.taplo.ConfigFile
+-- Whether to enable the usage of a Taplo configuration file.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field enabled boolean
+-- An absolute, or workspace relative path to the Taplo configuration file.
+---@field path string
+
+---@class _.lspconfig.settings.taplo.Taplo
+-- Use the bundled taplo language server. If set to `false`, the `taplo` executable must be found in PATH or must be set in `evenBetterToml.taplo.path`.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field bundled boolean
+---@field configFile _.lspconfig.settings.taplo.ConfigFile
+-- Environment variables for Taplo.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field environment table
+-- Additional arguments for Taplo. Has no effect for the bundled LSP.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field extraArgs string[]
+-- An absolute path to the `taplo` executable. `evenBetterToml.taplo.bundled` needs to be set to `false` for this to have any effect.
+---@field path string
+
+---@class _.lspconfig.settings.taplo.EvenBetterToml
+---@field completion _.lspconfig.settings.taplo.Completion
+---@field formatter _.lspconfig.settings.taplo.Formatter
+-- Array of Taplo rules in JSON format, see [Configuration File - Rules](https://taplo.tamasfe.dev/configuration/file.html#rules). The rules given here are appended to existing rules from config files, if any. There is no conversion done, all object keys must be snake_case, including formatting rules.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field rules any[]
+---@field schema _.lspconfig.settings.taplo.Schema
+-- Enable semantic tokens for inline table and array keys.
+---@field semanticTokens boolean
+---@field syntax _.lspconfig.settings.taplo.Syntax
+---@field taplo _.lspconfig.settings.taplo.Taplo
+
+---@class lspconfig.settings.taplo
+---@field evenBetterToml _.lspconfig.settings.taplo.EvenBetterToml
 
 ---@class _.lspconfig.settings.terraformls.Codelens
 -- Display reference counts above top level blocks and attributes.
