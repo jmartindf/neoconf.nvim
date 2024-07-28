@@ -1731,8 +1731,10 @@
 ---@field customFlutterDapPath string
 -- EXPERIMENTAL: The port where flutter daemon can be accessed if daemon is run remotely. This setting is intended for use by Google developers.
 ---@field daemonPort number
--- The path to a log file for communication with the DAP debug adapters. This is useful when trying to diagnose issues with debugging such as missed breakpoints. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for communication with the DAP debug adapters. This is useful when trying to diagnose issues with debugging such as missed breakpoints. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `${kind}` to insert a description of the kind of debug session ('dart', 'dart_test', 'flutter' etc.).
 ---@field dapLogFile string
+-- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
+-- 
 -- The path to a log file for Dart test runs. This is useful when trying to diagnose issues with unit test executions. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
 ---@field dartTestLogFile string
 -- The protocol to use for the Dart Debug Extension backend service and injected client. Using WebSockets can improve performance but may fail when connecting through some proxy servers.
@@ -1759,7 +1761,7 @@
 -- }
 -- ```
 ---@field devToolsLocation _.lspconfig.settings.dartls.DevToolsLocation
--- The path to a low-traffic log file for the Dart DevTools service.
+-- The path to a low-traffic log file for the Dart DevTools service. Use `${workspaceName}` to insert the name of the current workspace in the file path.
 ---@field devToolsLogFile string
 -- The port number to be used for the Dart DevTools (requires restart).
 ---@field devToolsPort number
@@ -1825,7 +1827,7 @@
 ---@field evaluateToStringInDebugViews boolean
 -- Whether to enable experimental (possibly unfinished or unstable) refactors on the lightbulb menu. This setting is intended for use by Dart Analysis Server developers or users that want to try out and provide feedback on in-progress refactors.
 ---@field experimentalRefactors boolean
--- The path to a low-traffic log file for basic extension and editor issues.
+-- The path to a low-traffic log file for basic extension and editor issues. Use `${workspaceName}` to insert the name of the current workspace in the file path.
 ---@field extensionLogFile string
 -- Whether to automatically run `adb connect 100.115.92.2:5555` when spawning the Flutter daemon when running on Chrome OS.
 ---@field flutterAdbConnectOnChromeOs boolean
@@ -1901,6 +1903,8 @@
 -- default = {}
 -- ```
 ---@field flutterRunAdditionalArgs string[]
+-- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
+-- 
 -- The path to a log file for `flutter run`, which is used to launch Flutter apps from VS Code. This is useful when trying to diagnose issues with apps launching (or failing to) on simulators and devices. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
 ---@field flutterRunLogFile string
 -- The path to a directory to save Flutter screenshots.
@@ -1937,6 +1941,8 @@
 -- default = {}
 -- ```
 ---@field flutterTestAdditionalArgs string[]
+-- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
+-- 
 -- The path to a log file for `flutter test`, which is used to run unit tests from VS Code. This is useful when trying to diagnose issues with unit test executions. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
 ---@field flutterTestLogFile string
 -- **LEGACY SETTING: Disabling this may break functionality on modern SDKs.**
@@ -2211,6 +2217,8 @@
 -- default = {}
 -- ```
 ---@field vmAdditionalArgs string[]
+-- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
+-- 
 -- The path to a log file for communication between Dart Code and the VM service. This is useful when trying to diagnose issues with debugging such as missed breakpoints. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
 ---@field vmServiceLogFile string
 -- Whether to show a warning when modifying files in the [system package cache](https://dart.dev/tools/pub/glossary#system-cache) directory.
@@ -2225,7 +2233,9 @@
 -- default = true
 -- ```
 ---@field warnWhenEditingFilesOutsideWorkspace boolean
--- The path to a log file for communication between Dart Code and the webdev daemon. This is useful when trying to diagnose issues with launching web apps. Use `${name`} in the log file name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
+-- 
+-- The path to a log file for communication between Dart Code and the webdev daemon. This is useful when trying to diagnose issues with launching web apps. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
 ---@field webDaemonLogFile string
 
 ---@class lspconfig.settings.dartls
@@ -7788,6 +7798,14 @@
 -- Preferred content provider (a 3rd party decompiler id, usually)
 ---@field preferred string
 
+---@class _.lspconfig.settings.jdtls.Diagnostic
+-- Specifies a list of file patterns for which matching documents should not have their diagnostics reported (eg. '**/Foo.java').
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field filter string[]
+
 ---@class _.lspconfig.settings.jdtls.Eclipse
 -- Enable/disable download of Maven source artifacts for Eclipse projects.
 ---@field downloadSources boolean
@@ -8257,6 +8275,7 @@
 ---@field completion _.lspconfig.settings.jdtls.Completion
 ---@field configuration _.lspconfig.settings.jdtls.Configuration
 ---@field contentProvider _.lspconfig.settings.jdtls.ContentProvider
+---@field diagnostic _.lspconfig.settings.jdtls.Diagnostic
 ---@field eclipse _.lspconfig.settings.jdtls.Eclipse
 ---@field edit _.lspconfig.settings.jdtls.Edit
 ---@field editor _.lspconfig.settings.jdtls.Editor
@@ -8382,6 +8401,46 @@
 -- Save file before execution
 ---@field saveOnEval boolean
 
+---@class _.lspconfig.settings.julials.Runtime
+-- Enable display of runtime inlay hints. These hints are provided by packages that overload a `show` method for the `application/vnd.julia-vscode.inlayHints` MIME type.
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field enabled boolean
+
+---@class _.lspconfig.settings.julials.ParameterNames
+-- Enable name hints for function parameters:
+-- ```julia
+-- foo(#= bar: =# 42)
+-- ```
+-- 
+-- ```lua
+-- default = "literals"
+-- ```
+---@field enabled "none" | "literals" | "all"
+
+---@class _.lspconfig.settings.julials.VariableTypes
+-- Enable type hints for variable definitions:
+-- ```julia
+-- foo #=::Int64=# = 42
+-- ```
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field enabled boolean
+
+---@class _.lspconfig.settings.julials.Static
+-- Enable display of static inlay hints.
+---@field enabled boolean
+---@field parameterNames _.lspconfig.settings.julials.ParameterNames
+---@field variableTypes _.lspconfig.settings.julials.VariableTypes
+
+---@class _.lspconfig.settings.julials.InlayHints
+---@field runtime _.lspconfig.settings.julials.Runtime
+---@field static _.lspconfig.settings.julials.Static
+
 ---@class _.lspconfig.settings.julials.Lint
 -- This compares  call signatures against all known methods for the called function. Calls with too many or too few arguments, or unknown keyword parameters are highlighted.
 -- 
@@ -8465,7 +8524,13 @@
 ---@class _.lspconfig.settings.julials.PersistentSession
 -- Always copy the command for connecting to an external REPL to the clipboard.
 ---@field alwaysCopy boolean
--- Experimental: Starts the interactive Julia session in a persistent `tmux` session. Note that `tmux` must be available in the shell defined below. If present the string `$[workspace]` will be replaced with the current file's workspace when the REPL is first opened.
+-- Behaviour when stopping a persistent session.
+-- 
+-- ```lua
+-- default = "ask"
+-- ```
+---@field closeStrategy "ask" | "close" | "disconnect"
+-- Experimental: Starts the interactive Julia session in a persistent `tmux` session. Note that `tmux` must be available in the shell defined with `#julia.persistentSession.shell#`.
 ---@field enabled boolean
 -- Shell used to start the persistent session.
 -- 
@@ -8473,27 +8538,21 @@
 -- default = "/bin/sh"
 -- ```
 ---@field shell string
--- Argument to execute code in the configured shell, e.g. `-c` for sh-likes or `/c` for `cmd`.
+-- Argument to execute code in the configured shell, e.g. `-c` for sh-likes or `/c` for `cmd`. Can contain multiple arguments separated by spaces.
 -- 
 -- ```lua
 -- default = "-c"
 -- ```
 ---@field shellExecutionArgument string
--- Name of the `tmux` session.
+-- Name of the `tmux` session. Explicitly supports substitution for the `${userHome}`, `${workspaceFolder}`, `${workspaceFolderBasename}`, `${workspaceFolder:<FOLDER_NAME>}`, `${pathSeparator}`, `${env:<ENVIRONMENT_VARIABLE>}`, `${config:<CONFIG_VARIABLE>} tokens.
 -- 
 -- ```lua
 -- default = "julia_vscode"
 -- ```
 ---@field tmuxSessionName string
--- Warn when stopping a persistent session.
--- 
--- ```lua
--- default = true
--- ```
----@field warnOnKill boolean
 
 ---@class _.lspconfig.settings.julials.Plots
--- The output directory to save plots to
+-- Default directory for saving plots. Can either be relative to the current workspace or absolute.
 ---@field path string
 
 ---@class _.lspconfig.settings.julials.Trace
@@ -8536,7 +8595,7 @@
 -- Functions or modules that are set to compiled mode when setting the defaults.
 -- 
 -- ```lua
--- default = { "Base.", "-Base.!", "-Base.all", "-Base.all!", "-Base.any", "-Base.any!", "-Base.cd", "-Base.iterate", "-Base.collect", "-Base.collect_similar", "-Base._collect", "-Base.collect_to!", "-Base.collect_to_with_first!", "-Base.filter", "-Base.filter!", "-Base.foreach", "-Base.findall", "-Base.findfirst", "-Base.findlast", "-Base.findnext", "-Base.findprev", "-Base.Generator", "-Base.map", "-Base.map!", "-Base.maximum!", "-Base.minimum!", "-Base.mktemp", "-Base.mktempdir", "-Base.open", "-Base.prod!", "-Base.redirect_stderr", "-Base.redirect_stdin", "-Base.redirect_stdout", "-Base.reenable_sigint", "-Base.setindex!", "-Base.setprecision", "-Base.setrounding", "-Base.show", "-Base.sprint", "-Base.sum", "-Base.sum!", "-Base.task_local_storage", "-Base.timedwait", "-Base.withenv", "-Base.Broadcast", "Core", "Core.Compiler.", "Core.IR", "Core.Intrinsics", "DelimitedFiles", "Distributed", "LinearAlgebra.", "Serialization", "Statistics", "-Statistics.mean", "SparseArrays", "Mmap" }
+-- default = { "Base.", "-Base.!", "-Base.|>", "-Base.all", "-Base.all!", "-Base.any", "-Base.any!", "-Base.cd", "-Base.iterate", "-Base.collect", "-Base.collect_similar", "-Base._collect", "-Base.collect_to!", "-Base.collect_to_with_first!", "-Base.filter", "-Base.filter!", "-Base.foreach", "-Base.findall", "-Base.findfirst", "-Base.findlast", "-Base.findnext", "-Base.findprev", "-Base.Generator", "-Base.map", "-Base.map!", "-Base.maximum!", "-Base.minimum!", "-Base.mktemp", "-Base.mktempdir", "-Base.open", "-Base.prod!", "-Base.redirect_stderr", "-Base.redirect_stdin", "-Base.redirect_stdout", "-Base.reenable_sigint", "-Base.setindex!", "-Base.setprecision", "-Base.setrounding", "-Base.show", "-Base.sprint", "-Base.sum", "-Base.sum!", "-Base.task_local_storage", "-Base.timedwait", "-Base.withenv", "-Base.Broadcast", "Core", "Core.Compiler.", "Core.IR", "Core.Intrinsics", "DelimitedFiles", "Distributed", "LinearAlgebra.", "Serialization", "Statistics", "-Statistics.mean", "SparseArrays", "Mmap" }
 -- ```
 ---@field debuggerDefaultCompiled any[]
 -- Delete Julia .cov files when running tests with coverage, leaving only a .lcov file behind.
@@ -8555,7 +8614,7 @@
 ---@field enableCrashReporter boolean
 -- Enable usage data and errors to be sent to the julia VS Code extension developers.
 ---@field enableTelemetry boolean
--- Path to a julia environment. VS Code needs to be reloaded for changes to take effect.
+-- Path to a julia environment. VS Code needs to be reloaded for changes to take effect. Explicitly supports substitution for the `${userHome}`, `${workspaceFolder}`, `${workspaceFolderBasename}`, `${workspaceFolder:<FOLDER_NAME>}`, `${pathSeparator}`, `${env:<ENVIRONMENT_VARIABLE>}`, `${config:<CONFIG_VARIABLE>} tokens.
 ---@field environmentPath string
 -- Points to the julia executable.
 -- 
@@ -8566,6 +8625,7 @@
 ---@field execution _.lspconfig.settings.julials.Execution
 -- Whether to automatically show the plot navigator when plotting.
 ---@field focusPlotNavigator boolean
+---@field inlayHints _.lspconfig.settings.julials.InlayHints
 ---@field lint _.lspconfig.settings.julials.Lint
 -- A workspace relative path to a Julia file that contains the tests that should be run for live testing.
 -- 
@@ -8573,6 +8633,12 @@
 -- default = "test/runtests.jl"
 -- ```
 ---@field liveTestFile string
+-- Number of processes to use for testing.
+-- 
+-- ```lua
+-- default = 1
+-- ```
+---@field numTestProcesses integer
 -- Julia package server. Sets the `JULIA_PKG_SERVER` environment variable *before* starting a Julia process. Leave this empty to use the systemwide default. Requires a restart of the Julia process.
 -- 
 -- ```lua
@@ -8598,8 +8664,6 @@
 -- ```
 ---@field symbolserverUpstream string
 ---@field trace _.lspconfig.settings.julials.Trace
--- Use an existing custom sysimage when starting the REPL
----@field useCustomSysimage boolean
 -- Display plots within VS Code. Might require a restart of the Julia process.
 -- 
 -- ```lua
@@ -11817,20 +11881,6 @@
 -- ```
 ---@field highlightRelatedRegexComponents boolean
 
----@class _.lspconfig.settings.omnisharp.ImplementType
--- %configuration.dotnet.implementType.insertionBehavior%
--- 
--- ```lua
--- default = "withOtherMembersOfTheSameKind"
--- ```
----@field insertionBehavior "withOtherMembersOfTheSameKind" | "atTheEnd"
--- %configuration.dotnet.implementType.propertyGenerationBehavior%
--- 
--- ```lua
--- default = "preferThrowingProperties"
--- ```
----@field propertyGenerationBehavior "preferThrowingProperties" | "preferAutoProperties"
-
 ---@class _.lspconfig.settings.omnisharp.InlayHints
 -- %configuration.csharp.inlayHints.enableInlayHintsForIndexerParameters%
 ---@field enableInlayHintsForIndexerParameters boolean
@@ -11915,6 +11965,12 @@
 ---@field trace "Trace" | "Debug" | "Information" | "Warning" | "Error" | "Critical" | "None"
 -- %configuration.omnisharp.dotnet.server.useOmnisharp%
 ---@field useOmnisharp boolean
+-- %configuration.dotnet.server.useServerGC%
+-- 
+-- ```lua
+-- default = true
+-- ```
+---@field useServerGC boolean
 -- %configuration.dotnet.server.waitForDebugger%
 ---@field waitForDebugger boolean
 
@@ -11925,6 +11981,20 @@
 -- default = true
 -- ```
 ---@field searchReferenceAssemblies boolean
+
+---@class _.lspconfig.settings.omnisharp.TypeMembers
+-- %configuration.dotnet.typeMembers.memberInsertionLocation%
+-- 
+-- ```lua
+-- default = "withOtherMembersOfTheSameKind"
+-- ```
+---@field memberInsertionLocation "withOtherMembersOfTheSameKind" | "atTheEnd"
+-- %configuration.dotnet.typeMembers.propertyGenerationBehavior%
+-- 
+-- ```lua
+-- default = "preferThrowingProperties"
+-- ```
+---@field propertyGenerationBehavior "preferThrowingProperties" | "preferAutoProperties"
 
 -- %generateOptionsSchema.expressionEvaluationOptions.description%
 -- 
@@ -12156,7 +12226,6 @@
 -- ```
 ---@field enableXamlTools boolean
 ---@field highlighting _.lspconfig.settings.omnisharp.Highlighting
----@field implementType _.lspconfig.settings.omnisharp.ImplementType
 ---@field inlayHints _.lspconfig.settings.omnisharp.InlayHints
 ---@field navigation _.lspconfig.settings.omnisharp.Navigation
 -- %configuration.dotnet.preferCSharpExtension%
@@ -12165,6 +12234,7 @@
 ---@field quickInfo _.lspconfig.settings.omnisharp.QuickInfo
 ---@field server _.lspconfig.settings.omnisharp.Server
 ---@field symbolSearch _.lspconfig.settings.omnisharp.SymbolSearch
+---@field typeMembers _.lspconfig.settings.omnisharp.TypeMembers
 -- %configuration.dotnet.unitTestDebuggingOptions%
 -- 
 -- ```lua
@@ -13565,6 +13635,12 @@
 -- default = {}
 -- ```
 ---@field extendIgnore string[]
+-- List of errors and warnings to append to select list.
+-- 
+-- ```lua
+-- default = {}
+-- ```
+---@field extendSelect string[]
 -- Only check for filenames matching the patterns in this list.
 ---@field filename string
 -- Hang closing bracket instead of matching indentation of opening bracket's line.
@@ -14849,17 +14925,23 @@
 ---@field fixViolation _.lspconfig.settings.ruff_lsp.FixViolation
 
 ---@class _.lspconfig.settings.ruff_lsp.Format
--- Additional command-line arguments to pass to `ruff format`, e.g., `"args": ["--config=/path/to/pyproject.toml"]`. Supports a subset of Ruff's command-line arguments, ignoring those that are required to operate the LSP, like `--force-exclude` and `--verbose`. This setting is not supported by the native server.
+-- Additional command-line arguments to pass to `ruff format`, e.g., `"args": ["--config=/path/to/pyproject.toml"]`. Supports a subset of Ruff's command-line arguments, ignoring those that are required to operate the LSP, like `--force-exclude` and `--verbose`.
+-- 
+-- **This setting is not supported by the native server.**
 -- 
 -- ```lua
 -- default = {}
 -- ```
 ---@field args string[]
--- Enable [preview mode](https://docs.astral.sh/ruff/settings/#format_preview) for the formatter; enables unstable formatting. This setting is used only by the native server.
+-- Enable [preview mode](https://docs.astral.sh/ruff/settings/#format_preview) for the formatter; enables unstable formatting.
+-- 
+-- **This setting is used only by the native server.**
 ---@field preview boolean
 
 ---@class _.lspconfig.settings.ruff_lsp.Lint
--- Additional command-line arguments to pass to `ruff check`, e.g., `"args": ["--config=/path/to/pyproject.toml"]`. Supports a subset of Ruff's command-line arguments, ignoring those that are required to operate the LSP, like `--force-exclude` and `--verbose`. This setting is not supported by the native server.
+-- Additional command-line arguments to pass to `ruff check`, e.g., `"args": ["--config=/path/to/pyproject.toml"]`. Supports a subset of Ruff's command-line arguments, ignoring those that are required to operate the LSP, like `--force-exclude` and `--verbose`.
+-- 
+-- **This setting is not supported by the native server.**
 -- 
 -- ```lua
 -- default = {}
@@ -14871,19 +14953,29 @@
 -- default = true
 -- ```
 ---@field enable boolean
--- Enable additional rule codes on top of existing configuration, instead of overriding it. Use `ALL` to enable all rules. This setting is used only by the native server.
+-- Enable additional rule codes on top of existing configuration, instead of overriding it. Use `ALL` to enable all rules.
+-- 
+-- **This setting is used only by the native server.**
 ---@field extendSelect string[]
--- Set rule codes to disable. See [the documentation](https://docs.astral.sh/ruff/settings/#lint_ignore) for more details. This setting is used only by the native server.
+-- Set rule codes to disable. See [the documentation](https://docs.astral.sh/ruff/settings/#lint_ignore) for more details.
+-- 
+-- **This setting is used only by the native server.**
 ---@field ignore string[]
--- Enable [preview mode](https://docs.astral.sh/ruff/settings/#lint_preview) for the linter; enables unstable rules and fixes. This setting is used only by the native server.
+-- Enable [preview mode](https://docs.astral.sh/ruff/settings/#lint_preview) for the linter; enables unstable rules and fixes.
+-- 
+-- **This setting is used only by the native server.**
 ---@field preview boolean
--- Run Ruff on every keystroke (`onType`) or on save (`onSave`). This setting is not supported by the native server.
+-- Run Ruff on every keystroke (`onType`) or on save (`onSave`).
+-- 
+-- **This setting is not supported by the native server.**
 -- 
 -- ```lua
 -- default = "onType"
 -- ```
 ---@field run "onType" | "onSave"
--- Set rule codes to enable. Use `ALL` to enable all rules. See [the documentation](https://docs.astral.sh/ruff/settings/#lint_select) for more details. This setting is used only by the native server.
+-- Set rule codes to enable. Use `ALL` to enable all rules. See [the documentation](https://docs.astral.sh/ruff/settings/#lint_select) for more details.
+-- 
+-- **This setting is used only by the native server.**
 ---@field select string[]
 
 ---@class _.lspconfig.settings.ruff_lsp.Trace
@@ -14895,16 +14987,22 @@
 ---@field server "off" | "messages" | "verbose"
 
 ---@class _.lspconfig.settings.ruff_lsp.Ruff
--- Additional command-line arguments to pass to `ruff check`, e.g., `"args": ["--config=/path/to/pyproject.toml"]`. Supports a subset of Ruff's command-line arguments, ignoring those that are required to operate the LSP, like `--force-exclude` and `--verbose`. This setting is not supported by the native server.
+-- Additional command-line arguments to pass to `ruff check`, e.g., `"args": ["--config=/path/to/pyproject.toml"]`. Supports a subset of Ruff's command-line arguments, ignoring those that are required to operate the LSP, like `--force-exclude` and `--verbose`.
+-- 
+-- **This setting is not supported by the native server.**
 -- 
 -- ```lua
 -- default = {}
 -- ```
 ---@field args string[]
 ---@field codeAction _.lspconfig.settings.ruff_lsp.CodeAction
--- Path to a `ruff.toml` or `pyproject.toml` file to use for configuration. By default, Ruff will discover configuration for each project from the filesystem, mirroring the behavior of the Ruff CLI. This setting is used only by the native server.
+-- Path to a `ruff.toml` or `pyproject.toml` file to use for configuration. By default, Ruff will discover configuration for each project from the filesystem, mirroring the behavior of the Ruff CLI.
+-- 
+-- **This setting is used only by the native server.**
 ---@field configuration string
--- The preferred method of resolving configuration in the editor with local configuration froml `.toml` files. This setting is used only by the native server.
+-- The preferred method of resolving configuration in the editor with local configuration from `.toml` files.
+-- 
+-- **This setting is used only by the native server.**
 -- 
 -- ```lua
 -- default = "editorFirst"
@@ -14918,7 +15016,9 @@
 ---@field enable boolean
 -- Controls whether Ruff registers as capable of code formatting.
 ---@field enableExperimentalFormatter boolean
--- Set paths for the linter and formatter to ignore. See [the documentation](https://docs.astral.sh/ruff/settings/#lint_exclude) for more details. This setting is used only by the native server.
+-- Set paths for the linter and formatter to ignore. See [the documentation](https://docs.astral.sh/ruff/settings/#lint_exclude) for more details.
+-- 
+-- **This setting is used only by the native server.**
 ---@field exclude string[]
 -- Whether to register Ruff as capable of handling `source.fixAll` actions.
 -- 
@@ -14945,9 +15045,19 @@
 -- default = {}
 -- ```
 ---@field interpreter string[]
--- Set the [line length](https://docs.astral.sh/ruff/settings/#line-length) used by the formatter and linter. Must be greater than 0 and less than or equal to 320. This setting is used only by the native server.
+-- Set the [line length](https://docs.astral.sh/ruff/settings/#line-length) used by the formatter and linter. Must be greater than 0 and less than or equal to 320.
+-- 
+-- **This setting is used only by the native server.**
 ---@field lineLength integer
 ---@field lint _.lspconfig.settings.ruff_lsp.Lint
+-- Path to the log file for the language server.
+-- 
+-- **This setting is used only by the native server.**
+---@field logFile string
+-- Controls the log level of the language server.
+-- 
+-- **This setting is used only by the native server.**
+---@field logLevel "error" | "warning" | "info" | "debug" | "trace"
 -- Whether to use the native language server, [`ruff-lsp`](https://github.com/astral-sh/ruff-lsp) or automatically decide between the two based on the Ruff version and extension settings.
 -- 
 -- ```lua
@@ -14966,7 +15076,9 @@
 -- default = {}
 -- ```
 ---@field path string[]
--- Run Ruff on every keystroke (`onType`) or on save (`onSave`). This setting is not supported by the native server.
+-- Run Ruff on every keystroke (`onType`) or on save (`onSave`).
+-- 
+-- **This setting is not supported by the native server.**
 -- 
 -- ```lua
 -- default = "onType"
@@ -15072,7 +15184,7 @@
 -- targets and features, with the following base command line:
 -- 
 -- ```bash
--- cargo check --quiet --workspace --message-format=json --all-targets
+-- cargo check --quiet --workspace --message-format=json --all-targets --keep-going
 -- ```
 -- .
 ---@field overrideCommand string[]
@@ -15763,14 +15875,14 @@
 
 ---@class _.lspconfig.settings.rust_analyzer.Const
 -- Whether to show const generic parameter name inlay hints.
----@field enable boolean
-
----@class _.lspconfig.settings.rust_analyzer.Lifetime
--- Whether to show generic lifetime parameter name inlay hints.
 -- 
 -- ```lua
 -- default = true
 -- ```
+---@field enable boolean
+
+---@class _.lspconfig.settings.rust_analyzer.Lifetime
+-- Whether to show generic lifetime parameter name inlay hints.
 ---@field enable boolean
 
 ---@class _.lspconfig.settings.rust_analyzer.Type
@@ -15956,13 +16068,6 @@
 -- default = true
 -- ```
 ---@field enable boolean
--- Internal config: use custom client-side commands even when the
--- client doesn't set the corresponding capability.
--- 
--- ```lua
--- default = true
--- ```
----@field forceCustomCommands boolean
 ---@field implementations _.lspconfig.settings.rust_analyzer.Implementations
 -- Where to render annotations.
 -- 
@@ -15993,8 +16098,6 @@
 -- default = true
 -- ```
 ---@field cargoTomlNotFound boolean
--- Whether to send an UnindexedProject notification to the client.
----@field unindexedProject boolean
 
 ---@class _.lspconfig.settings.rust_analyzer.Attributes
 -- Expand attribute macros. Requires `#rust-analyzer.procMacro.enable#` to be set.
@@ -16256,6 +16359,101 @@
 ---@field search _.lspconfig.settings.rust_analyzer.Search
 
 ---@class _.lspconfig.settings.rust_analyzer.Workspace
+-- Enables automatic discovery of projects using [`DiscoverWorkspaceConfig::command`].
+-- 
+-- [`DiscoverWorkspaceConfig`] also requires setting `progress_label` and `files_to_watch`.
+-- `progress_label` is used for the title in progress indicators, whereas `files_to_watch`
+-- is used to determine which build system-specific files should be watched in order to
+-- reload rust-analyzer.
+-- 
+-- Below is an example of a valid configuration:
+-- ```json
+-- "rust-analyzer.workspace.discoverConfig": {
+--         "command": [
+--                 "rust-project",
+--                 "develop-json",
+--                 {arg}
+--         ],
+--         "progressLabel": "rust-analyzer",
+--         "filesToWatch": [
+--                 "BUCK",
+--         ],
+-- }
+-- ```
+-- 
+-- ## On `DiscoverWorkspaceConfig::command`
+-- 
+-- **Warning**: This format is provisional and subject to change.
+-- 
+-- [`DiscoverWorkspaceConfig::command`] *must* return a JSON object
+-- corresponding to `DiscoverProjectData::Finished`:
+-- 
+-- ```norun
+-- #[derive(Debug, Clone, Deserialize, Serialize)]
+-- #[serde(tag = "kind")]
+-- #[serde(rename_all = "snake_case")]
+-- enum DiscoverProjectData {
+--         Finished { buildfile: Utf8PathBuf, project: ProjectJsonData },
+--         Error { error: String, source: Option<String> },
+--         Progress { message: String },
+-- }
+-- ```
+-- 
+-- As JSON, `DiscoverProjectData::Finished` is:
+-- 
+-- ```json
+-- {
+--         // the internally-tagged representation of the enum.
+--         "kind": "finished",
+--         // the file used by a non-Cargo build system to define
+--         // a package or target.
+--         "buildfile": "rust-analyzer/BUILD",
+--         // the contents of a rust-project.json, elided for brevity
+--         "project": {
+--                 "sysroot": "foo",
+--                 "crates": []
+--         }
+-- }
+-- ```
+-- 
+-- It is encouraged, but not required, to use the other variants on
+-- `DiscoverProjectData` to provide a more polished end-user experience.
+-- 
+-- `DiscoverWorkspaceConfig::command` may *optionally* include an `{arg}`,
+-- which will be substituted with the JSON-serialized form of the following
+-- enum:
+-- 
+-- ```norun
+-- #[derive(PartialEq, Clone, Debug, Serialize)]
+-- #[serde(rename_all = "camelCase")]
+-- pub enum DiscoverArgument {
+--      Path(AbsPathBuf),
+--      Buildfile(AbsPathBuf),
+-- }
+-- ```
+-- 
+-- The JSON representation of `DiscoverArgument::Path` is:
+-- 
+-- ```json
+-- {
+--         "path": "src/main.rs"
+-- }
+-- ```
+-- 
+-- Similarly, the JSON representation of `DiscoverArgument::Buildfile` is:
+-- 
+-- ```
+-- {
+--         "buildfile": "BUILD"
+-- }
+-- ```
+-- 
+-- `DiscoverArgument::Path` is used to find and generate a `rust-project.json`,
+-- and therefore, a workspace, whereas `DiscoverArgument::buildfile` is used to
+-- to update an existing workspace. As a reference for implementors,
+-- buck2's `rust-project` will likely be useful:
+-- https://github.com/facebook/buck2/tree/main/integrations/rust-project.
+---@field discoverConfig any|table
 ---@field symbol _.lspconfig.settings.rust_analyzer.Symbol
 
 ---@class _.lspconfig.settings.rust_analyzer.Rust-analyzer
