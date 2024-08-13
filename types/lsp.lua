@@ -1650,9 +1650,9 @@
 ---@field analyzerAdditionalArgs string[]
 -- The port number to be used for the Dart analyzer diagnostic server. This setting is can be useful for troubleshooting issues with the Dart Analysis Server.
 ---@field analyzerDiagnosticsPort number
--- The path to a log file for very detailed logging in the Dart Analysis Server that may be useful when trying to diagnose Analysis Server issues. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for very detailed logging in the Dart Analysis Server that may be useful when trying to diagnose Analysis Server issues. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field analyzerInstrumentationLogFile string
--- The path to a log file for communication between Dart Code and the Analysis Server. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for communication between Dart Code and the Analysis Server. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field analyzerLogFile string
 -- The path to a custom Dart Analysis Server. This setting is intended for use by Dart Analysis Server developers.
 ---@field analyzerPath string
@@ -1731,11 +1731,11 @@
 ---@field customFlutterDapPath string
 -- EXPERIMENTAL: The port where flutter daemon can be accessed if daemon is run remotely. This setting is intended for use by Google developers.
 ---@field daemonPort number
--- The path to a log file for communication with the DAP debug adapters. This is useful when trying to diagnose issues with debugging such as missed breakpoints. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `${kind}` to insert a description of the kind of debug session ('dart', 'dart_test', 'flutter' etc.).
+-- The path to a log file for communication with the DAP debug adapters. This is useful when trying to diagnose issues with debugging such as missed breakpoints. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `${kind}` to insert a description of the kind of debug session ('dart', 'dart_test', 'flutter' etc.). Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field dapLogFile string
 -- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
 -- 
--- The path to a log file for Dart test runs. This is useful when trying to diagnose issues with unit test executions. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for Dart test runs. This is useful when trying to diagnose issues with unit test executions. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field dartTestLogFile string
 -- The protocol to use for the Dart Debug Extension backend service and injected client. Using WebSockets can improve performance but may fail when connecting through some proxy servers.
 -- 
@@ -1761,7 +1761,7 @@
 -- }
 -- ```
 ---@field devToolsLocation _.lspconfig.settings.dartls.DevToolsLocation
--- The path to a low-traffic log file for the Dart DevTools service. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a low-traffic log file for the Dart DevTools service. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field devToolsLogFile string
 -- The port number to be used for the Dart DevTools (requires restart).
 ---@field devToolsPort number
@@ -1827,7 +1827,7 @@
 ---@field evaluateToStringInDebugViews boolean
 -- Whether to enable experimental (possibly unfinished or unstable) refactors on the lightbulb menu. This setting is intended for use by Dart Analysis Server developers or users that want to try out and provide feedback on in-progress refactors.
 ---@field experimentalRefactors boolean
--- The path to a low-traffic log file for basic extension and editor issues. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a low-traffic log file for basic extension and editor issues. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field extensionLogFile string
 -- Whether to automatically run `adb connect 100.115.92.2:5555` when spawning the Flutter daemon when running on Chrome OS.
 ---@field flutterAdbConnectOnChromeOs boolean
@@ -1865,7 +1865,7 @@
 -- default = {}
 -- ```
 ---@field flutterCustomEmulators object[]
--- The path to a log file for the `flutter daemon` service, which provides information about connected devices accessible from the status bar. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for the `flutter daemon` service, which provides information about connected devices accessible from the status bar. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field flutterDaemonLogFile string
 -- Whether to automatically run the Generate Localizations command for Flutter apps when saving .arb files.
 -- 
@@ -1905,7 +1905,7 @@
 ---@field flutterRunAdditionalArgs string[]
 -- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
 -- 
--- The path to a log file for `flutter run`, which is used to launch Flutter apps from VS Code. This is useful when trying to diagnose issues with apps launching (or failing to) on simulators and devices. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for `flutter run`, which is used to launch Flutter apps from VS Code. This is useful when trying to diagnose issues with apps launching (or failing to) on simulators and devices. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field flutterRunLogFile string
 -- The path to a directory to save Flutter screenshots.
 ---@field flutterScreenshotPath string
@@ -1943,7 +1943,7 @@
 ---@field flutterTestAdditionalArgs string[]
 -- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
 -- 
--- The path to a log file for `flutter test`, which is used to run unit tests from VS Code. This is useful when trying to diagnose issues with unit test executions. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for `flutter test`, which is used to run unit tests from VS Code. This is useful when trying to diagnose issues with unit test executions. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field flutterTestLogFile string
 -- **LEGACY SETTING: Disabling this may break functionality on modern SDKs.**
 -- 
@@ -2183,7 +2183,7 @@
 -- default = "name"
 -- ```
 ---@field testInvocationMode "name" | "line"
--- The path to a log file for the `dart tooling-daemon` service, which coordinates between various Dart and Flutter tools and extensions. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for the `dart tooling-daemon` service, which coordinates between various Dart and Flutter tools and extensions. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field toolingDaemonLogFile string
 -- **LEGACY SETTING: Only applies to Dart SDKs before v2.15 since DevTools now ships in the SDK.**
 -- 
@@ -2219,7 +2219,7 @@
 ---@field vmAdditionalArgs string[]
 -- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
 -- 
--- The path to a log file for communication between Dart Code and the VM service. This is useful when trying to diagnose issues with debugging such as missed breakpoints. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for communication between Dart Code and the VM service. This is useful when trying to diagnose issues with debugging such as missed breakpoints. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field vmServiceLogFile string
 -- Whether to show a warning when modifying files in the [system package cache](https://dart.dev/tools/pub/glossary#system-cache) directory.
 -- 
@@ -2235,7 +2235,7 @@
 ---@field warnWhenEditingFilesOutsideWorkspace boolean
 -- **LEGACY SETTING: Only applies when using the legacy debug adapters.**
 -- 
--- The path to a log file for communication between Dart Code and the webdev daemon. This is useful when trying to diagnose issues with launching web apps. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path.
+-- The path to a log file for communication between Dart Code and the webdev daemon. This is useful when trying to diagnose issues with launching web apps. Use `${name}` in the log file name to insert the Debug Session name to prevent concurrent debug sessions overwriting each others logs. Use `${workspaceName}` to insert the name of the current workspace in the file path. Use `~` to insert the user's home directory (the path should use `/` separators even on Windows). Only the noted substitutions are supported, others will stay as-is.
 ---@field webDaemonLogFile string
 
 ---@class lspconfig.settings.dartls
@@ -2538,6 +2538,8 @@
 -- ```
 ---@field suggestSpecs boolean
 ---@field trace _.lspconfig.settings.elixirls.Trace
+-- Don't try to look for mix.exs in parent directories
+---@field useCurrentRootFolderAsProjectDir boolean
 
 ---@class lspconfig.settings.elixirls
 ---@field elixirLS _.lspconfig.settings.elixirls.ElixirLS
@@ -6323,6 +6325,8 @@
 ---@field taskPresentation _.lspconfig.settings.haxe_language_server.TaskPresentation
 -- Whether to revert to a Haxe 3 style completion where only toplevel packages and imported types are shown (effectively making it incompatible with auto-imports). *Note:* this setting has no effect with Haxe versions earlier than 4.0.0-rc.4.
 ---@field useLegacyCompletion boolean
+-- Haxe 4.3.5 introduces new Json RPC based diagnostics. in order to be able to opt out of them set option to true. *Note:* will stop working on nightlies once #11413 gets merged
+---@field useLegacyDiagnostics boolean
 
 ---@class _.lspconfig.settings.haxe_language_server.Haxelib
 -- Path to the Haxelib executable
@@ -7156,6 +7160,33 @@
 ---@class lspconfig.settings.html
 ---@field html _.lspconfig.settings.html.Html
 
+---@class _.lspconfig.settings.intelephense.Implementations
+-- Enable a code lens that shows an abstract and interface implementations count and command to peek locations.
+---@field enable boolean
+
+---@class _.lspconfig.settings.intelephense.Overrides
+-- Enable a code lens that shows method override count and command to peek locations.
+---@field enable boolean
+
+---@class _.lspconfig.settings.intelephense.Parent
+-- Enable a code lens that indicates if a method has a parent implementation and command to peek location.
+---@field enable boolean
+
+---@class _.lspconfig.settings.intelephense.References
+-- Enable a code lens that shows a reference count and command to peek locations.
+---@field enable boolean
+
+---@class _.lspconfig.settings.intelephense.Usages
+-- Enable a code lens that shows a trait usages count and command to peek locations.
+---@field enable boolean
+
+---@class _.lspconfig.settings.intelephense.CodeLens
+---@field implementations _.lspconfig.settings.intelephense.Implementations
+---@field overrides _.lspconfig.settings.intelephense.Overrides
+---@field parent _.lspconfig.settings.intelephense.Parent
+---@field references _.lspconfig.settings.intelephense.References
+---@field usages _.lspconfig.settings.intelephense.Usages
+
 ---@class _.lspconfig.settings.intelephense.Compatibility
 -- Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax. eg `ArrayAccessOrTraversable|ElementType[]` => `ArrayAccessOrTraversable<mixed, ElementType>`.
 -- 
@@ -7504,6 +7535,7 @@
 ---@field server "off" | "messages" | "verbose"
 
 ---@class _.lspconfig.settings.intelephense.Intelephense
+---@field codeLens _.lspconfig.settings.intelephense.CodeLens
 ---@field compatibility _.lspconfig.settings.intelephense.Compatibility
 ---@field completion _.lspconfig.settings.intelephense.Completion
 ---@field diagnostics _.lspconfig.settings.intelephense.Diagnostics
@@ -8687,6 +8719,10 @@
 ---@class lspconfig.settings.julials
 ---@field julia _.lspconfig.settings.julials.Julia
 
+---@class _.lspconfig.settings.kotlin_language_server.Codegen
+-- Whether to enable code generation to a temporary build output directory for Java interoperability (via the non-standard kotlin/buildOutputLocation LSP method). Experimental.
+---@field enabled boolean
+
 ---@class _.lspconfig.settings.kotlin_language_server.Jvm
 -- Specifies the JVM target, e.g. "1.6" or "1.8"
 -- 
@@ -8821,6 +8857,12 @@
 -- default = "stdio"
 -- ```
 ---@field transport "stdio" | "tcp"
+-- Specifies glob patterns of files, which would be watched by LSP client. The LSP client doesn't support watching files outside a workspace folder.
+-- 
+-- ```lua
+-- default = { "**/*.kt", "**/*.kts", "**/*.java", "**/pom.xml", "**/build.gradle", "**/settings.gradle" }
+-- ```
+---@field watchFiles any[]
 
 ---@class _.lspconfig.settings.kotlin_language_server.Linting
 -- [DEBUG] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possible stability issues.
@@ -8845,6 +8887,7 @@
 ---@field server "off" | "messages" | "verbose"
 
 ---@class _.lspconfig.settings.kotlin_language_server.Kotlin
+---@field codegen _.lspconfig.settings.kotlin_language_server.Codegen
 ---@field compiler _.lspconfig.settings.kotlin_language_server.Compiler
 ---@field completion _.lspconfig.settings.kotlin_language_server.Completion
 -- [DEPRECATED] Specifies the debounce time limit. Lower to increase responsiveness at the cost of possible stability issues.
@@ -10727,6 +10770,12 @@
 -- default = {}
 -- ```
 ---@field protectedName string[]
+-- TODO: Needs documentation
+-- 
+-- ```lua
+-- default = "glob"
+-- ```
+---@field regengine "glob" | "lua"
 
 ---@class _.lspconfig.settings.lua_ls.Format
 -- The default format configuration. Has a lower priority than `.editorconfig` file in the workspace.
@@ -15258,13 +15307,6 @@
 -- default = "discover"
 -- ```
 ---@field sysroot string
--- Whether to run cargo metadata on the sysroot library allowing rust-analyzer to analyze
--- third-party dependencies of the standard libraries.
--- 
--- This will cause `cargo` to create a lockfile in your sysroot directory. rust-analyzer
--- will attempt to clean up afterwards, but nevertheless requires the location to be
--- writable to.
----@field sysrootQueryMetadata boolean
 -- Relative path to the sysroot library sources. If left unset, this will default to
 -- `{cargo.sysroot}/lib/rustlib/src/rust/library`.
 -- 
@@ -16371,13 +16413,12 @@
 -- "rust-analyzer.workspace.discoverConfig": {
 --         "command": [
 --                 "rust-project",
---                 "develop-json",
---                 {arg}
+--                 "develop-json"
 --         ],
 --         "progressLabel": "rust-analyzer",
 --         "filesToWatch": [
---                 "BUCK",
---         ],
+--                 "BUCK"
+--         ]
 -- }
 -- ```
 -- 
@@ -16898,6 +16939,8 @@
 ---@field server "off" | "messages" | "verbose"
 
 ---@class _.lspconfig.settings.sourcekit.Sourcekit-lsp
+-- **Experimental**: Enable or disable background indexing. This option has no effect in Swift versions prior to 6.0.
+---@field backgroundIndexing boolean
 -- Disable SourceKit-LSP
 ---@field disable boolean
 -- Arguments to pass to SourceKit-LSP. Keys and values should be provided as individual entries in the list. e.g. `['--log-level', 'debug']`
@@ -18977,6 +19020,8 @@
 ---@field wrapAttributes "auto" | "force" | "force-aligned" | "force-expand-multiline" | "aligned-multiple" | "preserve" | "preserve-aligned"
 
 ---@class _.lspconfig.settings.volar.InlayHints
+-- Show inlay hints for destructured prop.
+---@field destructuredProps boolean
 -- Show inlay hints for event argument in inline handlers.
 ---@field inlineHandlerLeading boolean
 -- Show inlay hints for missing required props.
